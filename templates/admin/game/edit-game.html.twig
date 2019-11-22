@@ -1,29 +1,31 @@
 {% extends 'admin_base.html.twig' %}
 
 
-{% block title %}Oyunlar{% endblock %}
+{% block title %}Ürünler{% endblock %}
 {% block content %}
 <!-- MAIN -->
 <div class="main">
   <!-- MAIN CONTENT -->
   <div class="main-content">
     <div class="container-fluid">
-      <h3 class="page-title">Oyun Düzenle</h3>
+      <h3 class="page-title">Ürün Düzenle</h3>
 
       <div class="panel col-md-6">
 
         <div class="panel-body">
           <form method="post">
-            <input type="text" name="games[name]" value="{{game.name}}" class="form-control" placeholder="Oyun Adı">
+            <input type="text" name="sales[name]" value="{{sale.name}}" class="form-control" placeholder="Ürün Adı">
             <br>
-            <input type="number" name="games[price]" value="{{game.price}}" class="form-control" placeholder="Oyun Fiyatı">
+            <input type="number" name="sales[price]" value="{{sale.price}}" class="form-control" placeholder="Ürün Fiyatı">
             <br>
-            <input type="text" name="games[image]" value="{{game.image}}" class="form-control" placeholder="Resim Yolu">
-            <input type="hidden" name="games[status]"  value="false">
+            {# <input type="text" name="sales[image]" value="{{sale.image}}" class="form-control" placeholder="Resim Yolu"> #}
+            <input type="hidden" name="sales[status]"  value="false">
+            <input type="hidden" name="sales[username]"  value="{{sale.username}}">
+
 
             <br>
             <label for="">Kategori</label>
-           <select name="games[category]" class="form-control">
+           <select name="sales[category]" class="form-control">
              {% for cat in catList %}
               
                 <option value="{{ cat.id }}">{{ cat.name }}</option>
@@ -35,8 +37,8 @@
 
             <br>
 
-            <textarea name="games[description]" id="editor">
-               {{game.description}}
+            <textarea name="sales[description]" id="editor">
+               {{sale.description}}
             </textarea>
 
             <script>

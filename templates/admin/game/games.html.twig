@@ -1,14 +1,14 @@
 {% extends 'admin_base.html.twig' %}
 
 
-{% block title %}Oyunlar{% endblock %}
+{% block title %}Ürünler{% endblock %}
 {% block content %}
 <!-- MAIN -->
 <div class="main">
 	<!-- MAIN CONTENT -->
 	<div class="main-content">
 		<div class="container-fluid">
-			<h3 class="page-title">Oyunlar</h3>
+			<h3 class="page-title">Ürünler</h3>
 			<a href="{{ path('add-game') }}" class="btn btn-success mb-10" style="margin-bottom:20px"><i class="fa fa-plus"
 				 style="margin-right:10px"></i>Ekle</a>
 
@@ -30,31 +30,32 @@
 							</tr>
 						</thead>
 						<tbody>
-							{% for game in games %}
+							{% for sale in sales %}
 							<tr>
-								<td>{{game.id}}</td>
-								<td>{{game.name}}</td>
-								<td>
-										{% if game.image == null %}
+								<td>{{sale.id}}</td>
+								<td>{{sale.name}}</td>
+								<td>{{sale.name}}</td>
+								{# <td>
+										{% if sale.image == null %}
 											<i fontSize="50" class="fa fa-image"></i>
 										{% else %}
-										<img src="{{ asset('images') }}/{{game.image}}" alt="" height="40">
+										<img src="{{ asset('images') }}/{{sale.image}}" alt="" height="40">
 										{% endif %}
-								</td>
-								<td>{{game.price}}</td>
-								{% if game.status == "true" %}
+								</td> #}
+								<td>{{sale.price}}</td>
+								{% if sale.status == "true" %}
 									<td>
-										<a href="{{ path("update-status", {'id': game.id, 'status':'false'} ) }}" class="aktif" href="#"></a>
+										<a href="{{ path("update-status", {'id': sale.id, 'status':'false'} ) }}" class="aktif" href="#"></a>
 									</td>
-								{% elseif game.status == "false" %}
+								{% elseif sale.status == "false" %}
 									<td>
-										<a href="{{ path("update-status", {'id': game.id, 'status':'true'} ) }}" class="pasif" href="#"></a>
+										<a href="{{ path("update-status", {'id': sale.id, 'status':'true'} ) }}" class="pasif" href="#"></a>
 									</td>
 								{% endif %}
 								
 								<td>PS4</td>
-								<td><a href="{{ path("edit-game", {'id': game.id} ) }}"><i class="btn btn-primary fa fa-edit"></i></a></td>
-								<td><a href="{{ path("delete-game", {'id': game.id} ) }}" onclick="return confirm('Are you sure!');" ><i class="btn btn-danger fa fa-trash"></i></a> </td>
+								<td><a href="{{ path("edit-sale", {'id': sale.id} ) }}"><i class="btn btn-primary fa fa-edit"></i></a></td>
+								<td><a href="{{ path("delete-sale", {'id': sale.id} ) }}" onclick="return confirm('Are you sure!');" ><i class="btn btn-danger fa fa-trash"></i></a> </td>
 							</tr>
 
 							{% endfor %}

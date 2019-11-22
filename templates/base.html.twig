@@ -160,9 +160,9 @@
     <div class="carousel" data-flickity='{ "autoPlay": true }'>
       {% for slide in sliders %}
       <div class="carousel-cell">
-        <img class="slider-img" src="{{ asset('images') }}/{{slide.image}}" alt="">
+        <img class="slider-img" src="http://127.0.0.1:8000/images/27296300363c0c68e57dc3e28fd03690.jpeg" alt="">
         <div class="slider-game">
-          <div class="slider-game__name"><a class="slider-game__name" href="{{slide.url}}">{{slide.name}}</a></div>
+          <div class="slider-game__name"><a class="slider-game__name" href="{{ path("urun-detay", {'id': slide.id} ) }}">{{slide.name}}</a></div>
           <div class="slider-game__price">{{slide.price}} TL</div>
         </div>
       </div>
@@ -181,9 +181,9 @@
       <div class="main">
         {% for sale in sales %}
 
-       
+       {% if sale.status == "true" %}
         <div class="product">
-          <a href="{{ path("game-detay", {'id': sale.id} ) }}">
+          <a href="{{ path("urun-detay", {'id': sale.id} ) }}">
             <div class="product__top">
               <img class="product__top--img" src="http://127.0.0.1:8000/images/27296300363c0c68e57dc3e28fd03690.jpeg" alt="">
             </div>
@@ -197,6 +197,7 @@
             </div>
           </div>
         </div>
+          {% endif %}
         {% endfor %}
       </div>
     </div>

@@ -1,14 +1,14 @@
 {% extends 'admin_base.html.twig' %}
 
 
-{% block title %}Oyunlar{% endblock %}
+{% block title %}Ürünler{% endblock %}
 {% block content %}
 <!-- MAIN -->
 <div class="main">
 	<!-- MAIN CONTENT -->
 	<div class="main-content">
 		<div class="container-fluid">
-			<h3 class="page-title">Satıştaki Oyunlar</h3>
+			<h3 class="page-title">Satıştaki Ürünler</h3>
 
 			<!-- BASIC TABLE -->
 			<div class="panel">
@@ -18,7 +18,7 @@
 						<thead>
 							<tr>
 								<th>ID</th>
-								<th>Oyun ID</th>
+								<th>Product ID</th>
 								<th>Price</th>
 								<th>Username</th>
 								<th>Description</th>
@@ -34,11 +34,11 @@
 								<td>{{sale.price}}</td>
 								<td>{{sale.username}}</td>
 								<td>{{sale.description}}</td>
-								{% if sale.status == "aktif" %}
+								{% if sale.status == "true" %}
 									<td>
 										<a class="aktif" href="#"></a>
 									</td>
-								{% elseif sale.status == "pasif" %}
+								{% elseif sale.status == "false" %}
 									<td>
 										<a class="pasif" href="#"></a>
 									</td>

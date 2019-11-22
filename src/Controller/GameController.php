@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
 class GameController extends Controller
 {
     /**
-     * @Route("/admin/oyunlar", name="oyunlar")
+     * @Route("/admin/Ürünler", name="Ürünler")
      */
     public function index()
     {   
@@ -39,13 +39,13 @@ class GameController extends Controller
     public function sales()
     {   
         $sales = $this -> getDoctrine()->getRepository(Sales::class)->findAll();  
-        return $this->render('admin/sales/sales.html.twig', [
+        return $this->render('admin/game/games.html.twig', [
             'sales' => $sales,
         ]);
     }
 
     /**
-     * @Route("/admin/oyunlar/add", name="add-game", methods="GET|POST")
+     * @Route("/admin/Ürünler/add", name="add-game", methods="GET|POST")
      */
     public function addGame(Request $request, CategoryRepository $catRepo): Response
     {   
@@ -69,7 +69,7 @@ class GameController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($game);
             $em->flush();
-            return $this->redirectToRoute('oyunlar');
+            return $this->redirectToRoute('Ürünler');
         }
 
         return $this->render('admin/game/oyun-ekle.html.twig', [
@@ -79,64 +79,58 @@ class GameController extends Controller
     }  
 
     /**
-     * @Route("/admin/oyunlar/edit/{id}", name="edit-game", methods="GET|POST")
+     * @Route("/admin/sales/edit/{id}", name="edit-sale", methods="GET|POST")
      */
-    public function editGame(Request $request, Games $games,CategoryRepository $catRepo): Response
+    public function editSale(Request $request, Sales $sales,CategoryRepository $catRepo): Response
     {    
 
-       $catList = $catRepo->findAll();
+        $catList = $catRepo->findAll();
 
-        $form = $this->createForm(GamesType::class, $games);
+        $form = $this->createForm(SalesType::class, $sales);
         $form->handleRequest($request);
-        
-
-        
 
          //Save to DATABASE
-        if($form->isSubmitted() && $form->isValid()) {
-            
+        if($form->isSubmitted()) {
             $this ->getDoctrine() ->getManager()->flush();
-
-            return $this->redirectToRoute('oyunlar');
+            return $this->redirectToRoute('sales');
         }
 
         return $this->render('admin/game/edit-game.html.twig', [
-            'game'=>$games,
+            'sale'=>$sales,
             'catList' => $catList,
-
         ]);
     }
 
     /**
-     * @Route("/admin/oyunlar/edit/{id}/{status}", name="update-status", methods="GET|POST")
+     * @Route("/admin/sales/edit/{id}/{status}", name="update-status", methods="GET|POST")
      */
-    public function updateStatus(Request $request, $id, $status, Games $games): Response
+    public function updateStatus(Request $request, $id, $status, Sales $sales): Response
     {   
         
         $em = $this->getDoctrine()->getManager();
-        $game = $em->getRepository(Games::class)->find($id);
+        $sale = $em->getRepository(Sales::class)->find($id);
         
         if($status == "true") {
-            $game->setStatus('true');
+            $sale->setStatus('true');
             $em->flush();
         }else {
-            $game->setStatus('false');
+            $sale->setStatus('false');
             $em->flush();
         }
 
-        return $this->redirectToRoute('oyunlar');
+        return $this->redirectToRoute('sales');
     }
 
 
     /**
-     * @Route("/admin/oyunlar/delete/{id}", name="delete-game", methods="GET|POST")
+     * @Route("/admin/sales/delete/{id}", name="delete-sale", methods="GET|POST")
      */
-    public function deleteGame(Games $games)
+    public function deleteSale(Sales $sales)
     {  
         $em = $this->getDoctrine()->getManager();
-        $em->remove($games);
+        $em->remove($sales);
         $em->flush();
-        return $this->redirectToRoute('oyunlar');
+        return $this->redirectToRoute('sales');
     }
 
     /**

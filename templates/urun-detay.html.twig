@@ -43,7 +43,7 @@
   <div class="container">
     <div class="game-main">
       <div class="game-title">
-        <h3>{{game.name}}</h3>
+        <h3>{{product.name}}</h3>
       </div>
       <div class="game-bottom">
         <div class="game-left">
@@ -69,7 +69,7 @@
             </div>
           </div>
           <div class="price">
-            {{minPrice.price}}.00 ₺
+            {{product.price}}.00 ₺
           </div>
           <div class="buy">
             <a class="buy__btn" href="#buy">Satın Al</a>
@@ -80,14 +80,14 @@
   
     <div class="desc">
       <h3 class="desc__title">Açıklama</h3>
-          {{game.description | raw}}
+          {{product.description | raw}}
         </div>
 
     <div class="comments-wrapper">
       <h3>Üye Yorumları</h3>
 
       {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-       <form class="yorum-form" action="{{ path('yorum-yap')}}" method="POST">
+       {# <form class="yorum-form" action="{{ path('yorum-yap')}}" method="POST">
           <textarea name="comments[comment]" id="comment" cols="30" rows="3" placeholder="Yorumunuz"></textarea>
          
           <input type="hidden" name="token" value="{{ csrf_token('comment-form') }}">
@@ -99,7 +99,7 @@
 
           <button class="btn-yorum" type="submit">Yorum Gönder</button>
     
-        </form>
+        </form> #}
         {% else %}
         <a class="yorum-link" href="/login">Yorum göndermek için giriş yapın.</a>
       {% endif %}
@@ -121,50 +121,7 @@
     
     </div>
 
-    <div class="other-seller">
-      <h2 id="buy" class="other-seller-title">Diğer Teklifler : {{sales|length}}</h2>
-      
-							{% for sale in sales %}
-
-
-
-
-              <div class="bottom-seller">
-                <div class="seller-left">
-                  <div class="other-seller-name">
-                   {{ sale.username }}
-               
-                  </div>
-                  <div class="other-seller-rate">
-                    95% | 652 Satış
-                  </div>
-                </div>
-                <div class="seller-center">
-                  <p class="other-seller-desc">
-                    {{sale.description}}
-                  </p>
-                </div>
-                <div class="seller-right">
-                  <div class="bottom-price">
-                   {{ sale.price }} ₺
-                  </div>
-                <form action="{{ path("shop_cart_new")}}" method="POST">
-                  <input type="hidden" name="productid" value="{{ sale.id }}">
-                  <input type="hidden" name="name" value="{{ sale.name}}">
-                  
-                  <input type="hidden" name="userid" value="1">
-                  <div class="other-buy">
-                    <button style="cursor:pointer" class="other-buy-btn" type="submit"><i style="color:white" class="fas fa-shopping-cart"></i></button>
-                  </div>
-                </form>
-
-                </div>
-              </div>
-
-							{% endfor %}
-
-
-    </div>
+    
   </div>
 
   {% include 'components/footer.html.twig' %}

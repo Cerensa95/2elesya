@@ -326,8 +326,7 @@ nav {
 }
 
 .form {
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-    url("../images/login.jpg");
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
   background-size: cover;
   height: 100vh;
 }
@@ -336,7 +335,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 40px;
+  padding: 20px 40px;
 }
 
 /* ********** */

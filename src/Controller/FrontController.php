@@ -35,7 +35,7 @@ class FrontController extends Controller
     {   
 
         $sales = $this -> getDoctrine()->getRepository(Sales::class)->findAll();  
-        $sliders = $this -> getDoctrine()->getRepository(Sliders::class)->findAll(); 
+        $sliders =$this -> getDoctrine()->getRepository(Sales::class)->findAll();
         $data = $settingRepository->findAll();
 
         $cats = $this->categoryList();
