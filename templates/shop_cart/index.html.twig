@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  {% block stylesheets %}{% endblock %}
+  <style>
+     #customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 800px;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #df7d26;
+  color: white;
+}     
+
+</style>
+</head>
+
+<body>
+  {% include 'components/header.html.twig' %}
+
+  <div class="container">
+    <div class="game-main">
+      <div class="game-title">
+        <h3>Sepetim</h3>
+      </div>
+      <div class="game-bottom">
+        <div class="sidebar">
+             {{ include('user/usersidebar.html.twig') }}
+        </div>
+        <table id="customers">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for shop_cart in shop_carts %}
+                <tr>
+                    <td>{{ shop_cart.id }}</td>
+                    <td>{{ shop_cart.name }}</td>
+                    <td>{{ shop_cart.price }}</td>
+                    <td>
+                        <a href="{{ path('shop_cart_del', {'id': shop_cart.id}) }}" onclick="return confirm('Are you sure?');">
+                            <i style="color:red" class="fa fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+            {% endfor %}
+            </tbody>
+       
+        </table>
+          
+       {% if(shop_carts) %}
+      
+        <a href="{{ path('orders_new') }}" class="buy-btn btn-onay">Sepeti Onayla</a>
+      {% endif %}
+      </div>
+        
+    
+
+       
+      </div>
+    </div>
+
+  {% include 'components/footer.html.twig' %}
+
+  {% block body %}{% endblock %}
+  {% block javascripts %}{% endblock %}
+</body>
+
+</html>

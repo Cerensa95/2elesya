@@ -1,0 +1,85 @@
+{% extends 'admin_base.html.twig' %}
+
+
+{% block title %}Setting{% endblock %}
+{% block content %}
+<!-- MAIN -->
+<div class="main">
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <div class="container-fluid">
+      <h3 class="page-title">Edit Settings</h3>
+
+      <div class="panel col-md-6">
+
+        <div class="panel-body">
+
+<form method="post">
+            <input type="text" name="setting[title]" value="{{setting.title}}" class="form-control" placeholder="Title">
+            <br>
+            <input type="text" name="setting[description]" value="{{setting.description}}" class="form-control" placeholder="Description">
+            <br>
+            <input type="text" name="setting[keywords]" value="{{setting.keywords}}" class="form-control" placeholder="Keywords">
+            <br>
+            <input type="text" name="setting[company]" value="{{setting.company}}" class="form-control" placeholder="Company">
+            <br>
+            <input type="text" name="setting[adress]" value="{{setting.adress}}" class="form-control" placeholder="Address">
+            <br>
+            <input type="text" name="setting[fax]" value="{{setting.fax}}" class="form-control" placeholder="Fax">
+            <br>
+            <input type="text" name="setting[email]" value="{{setting.email}}" class="form-control" placeholder="Email">
+            <br>
+             <input type="text" name="setting[smtpserver]" value="{{setting.smtpserver}}" class="form-control" placeholder="SMTP Server">
+            <br>
+             <input type="text" name="setting[smtpmail]" value="{{setting.smtpmail}}" class="form-control" placeholder="SMTP Mail">
+            <br>
+             <input type="text" name="setting[smtppassword]" value="{{setting.smtppassword}}" class="form-control" placeholder="SMTP Password">
+            <br>
+             <input type="text" name="setting[smtpport]" value="{{setting.smtpport}}" class="form-control" placeholder="SMTP Port">
+            <br>
+            <label for="">About Us</label>
+            <br>
+            <textarea  name="setting[aboutus]" id="aboutus" class="form-control">
+               {{setting.aboutus}}
+            </textarea>
+            <label for="">Contact</label>
+            <br>
+            <textarea name="setting[contact]" id="contact">
+               {{setting.contact}}
+            </textarea>
+            <label for="">Referances</label>
+            <br>
+            <textarea name="setting[referances]" id="referances">
+               {{setting.referances}}
+            </textarea>
+
+            <script>
+                        ClassicEditor
+                            .create( document.querySelector( '#aboutus' ) )
+                            .catch( error => {
+                                console.error( error );
+                            } );
+                        ClassicEditor
+                            .create( document.querySelector( '#contact' ) )
+                            .catch( error => {
+                                console.error( error );
+                            } );
+                        ClassicEditor
+                            .create( document.querySelector( '#referances' ) )
+                            .catch( error => {
+                                console.error( error );
+                            } );
+            </script>
+
+            <button type="submit" class="btn btn-info" style="margin-top: 20px">Kaydet</button>
+          </form>
+  </div>
+
+      </div>
+      <!-- END BASIC TABLE -->
+
+    </div>
+  </div>
+</div>
+<!-- END MAIN -->
+{% endblock %}

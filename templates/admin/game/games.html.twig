@@ -1,0 +1,71 @@
+{% extends 'admin_base.html.twig' %}
+
+
+{% block title %}Oyunlar{% endblock %}
+{% block content %}
+<!-- MAIN -->
+<div class="main">
+	<!-- MAIN CONTENT -->
+	<div class="main-content">
+		<div class="container-fluid">
+			<h3 class="page-title">Oyunlar</h3>
+			<a href="{{ path('add-game') }}" class="btn btn-success mb-10" style="margin-bottom:20px"><i class="fa fa-plus"
+				 style="margin-right:10px"></i>Ekle</a>
+
+			<!-- BASIC TABLE -->
+			<div class="panel">
+
+				<div class="panel-body">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Name</th>
+								<th>Image</th>
+								<th>Price</th>
+								<th>Status</th>
+								<th>Category</th>
+								<th>Edit</th>
+								<th>Delete</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for game in games %}
+							<tr>
+								<td>{{game.id}}</td>
+								<td>{{game.name}}</td>
+								<td>
+										{% if game.image == null %}
+											<i fontSize="50" class="fa fa-image"></i>
+										{% else %}
+										<img src="{{ asset('images') }}/{{game.image}}" alt="" height="40">
+										{% endif %}
+								</td>
+								<td>{{game.price}}</td>
+								{% if game.status == "true" %}
+									<td>
+										<a href="{{ path("update-status", {'id': game.id, 'status':'false'} ) }}" class="aktif" href="#"></a>
+									</td>
+								{% elseif game.status == "false" %}
+									<td>
+										<a href="{{ path("update-status", {'id': game.id, 'status':'true'} ) }}" class="pasif" href="#"></a>
+									</td>
+								{% endif %}
+								
+								<td>PS4</td>
+								<td><a href="{{ path("edit-game", {'id': game.id} ) }}"><i class="btn btn-primary fa fa-edit"></i></a></td>
+								<td><a href="{{ path("delete-game", {'id': game.id} ) }}" onclick="return confirm('Are you sure!');" ><i class="btn btn-danger fa fa-trash"></i></a> </td>
+							</tr>
+
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- END BASIC TABLE -->
+
+		</div>
+	</div>
+</div>
+<!-- END MAIN -->
+{% endblock %}

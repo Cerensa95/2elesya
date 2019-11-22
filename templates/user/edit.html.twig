@@ -1,0 +1,42 @@
+{% extends 'admin_base.html.twig' %}
+
+
+{% block content %}
+<!-- MAIN -->
+<div class="main">
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <div class="container-fluid">
+      <h3 class="page-title">User Edit</h3>
+
+      <div class="panel col-md-6">
+
+        <div class="panel-body">
+            <form method="post">
+            <label>Email</label>
+
+            <input type="text" name="user[email]" value="{{user.email}}" class="form-control" placeholder="Kategori İsmi">
+            <br>
+            <label>Name</label>
+            
+            <input type="text" name="user[name]" value="{{user.name}}" class="form-control" placeholder="Keywords">
+            <br>
+            <label>Password</label>
+                <input type="hidden" name="user[status]" value="{{user.status}}" class="form-control" placeholder="Description">
+
+            <input type="text" name="user[password]" value="{{user.password}}" class="form-control" placeholder="Description">
+            <label>Türü</label>
+             <select name="user[roles]" class="form-control">
+                {% for role in user.roles %}
+              
+                <option selected >{{ role }}</option>
+
+              {% endfor %}
+                <option value="ROLE_ADMIN">ROLE_ADMIN</option>
+                <option value="ROLE_USER">ROLE_USER</option>
+            </select>
+         
+            <br>
+            <button type="submit" class="btn btn-info" style="margin-top: 20px">Kaydet</button>
+          </form>
+{% endblock %}

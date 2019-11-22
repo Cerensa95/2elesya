@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  {% block stylesheets %}{% endblock %}
+  <style>
+     #customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 800px;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #df7d26;
+  color: white;
+}     
+
+</style>
+</head>
+
+<body>
+  {% include 'components/header.html.twig' %}
+
+  <div class="container">
+    <div class="game-main">
+      <div class="game-title">
+        <h3>Siparislerim</h3>
+      </div>
+      <div class="game-bottom">
+        <div class="sidebar">
+             {{ include('user/usersidebar.html.twig') }}
+        </div>
+        <table id="customers">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Yorumum</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for comment in comments %}
+            <tr>
+                <td>{{ comment.id }}</td>
+                <td>{{ comment.comment }}</td>
+                <td>{{ comment.username }}</td>
+            </tr>
+       
+        {% endfor %}
+        </tbody>
+    </table>
+
+  
+      </div>
+    </div>
+
+  {% include 'components/footer.html.twig' %}
+
+  {% block body %}{% endblock %}
+  {% block javascripts %}{% endblock %}
+</body>
+
+</html>

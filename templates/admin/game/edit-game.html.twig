@@ -1,0 +1,61 @@
+{% extends 'admin_base.html.twig' %}
+
+
+{% block title %}Oyunlar{% endblock %}
+{% block content %}
+<!-- MAIN -->
+<div class="main">
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <div class="container-fluid">
+      <h3 class="page-title">Oyun Düzenle</h3>
+
+      <div class="panel col-md-6">
+
+        <div class="panel-body">
+          <form method="post">
+            <input type="text" name="games[name]" value="{{game.name}}" class="form-control" placeholder="Oyun Adı">
+            <br>
+            <input type="number" name="games[price]" value="{{game.price}}" class="form-control" placeholder="Oyun Fiyatı">
+            <br>
+            <input type="text" name="games[image]" value="{{game.image}}" class="form-control" placeholder="Resim Yolu">
+            <input type="hidden" name="games[status]"  value="false">
+
+            <br>
+            <label for="">Kategori</label>
+           <select name="games[category]" class="form-control">
+             {% for cat in catList %}
+              
+                <option value="{{ cat.id }}">{{ cat.name }}</option>
+
+              {% endfor %}
+            </select>
+            <br>
+            <label for="">Açıklama</label>
+
+            <br>
+
+            <textarea name="games[description]" id="editor">
+               {{game.description}}
+            </textarea>
+
+            <script>
+                        ClassicEditor
+                            .create( document.querySelector( '#editor' ) )
+                            .catch( error => {
+                                console.error( error );
+                            } );
+            </script>
+
+            <button type="submit" class="btn btn-info" style="margin-top: 20px">Kaydet</button>
+          </form>
+        </div>
+
+      </div>
+      <!-- END BASIC TABLE -->
+
+    </div>
+  </div>
+</div>
+<!-- END MAIN -->
+{% endblock %}

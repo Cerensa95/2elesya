@@ -1,0 +1,56 @@
+{% extends 'admin_base.html.twig' %}
+
+
+{% block title %}Oyunlar{% endblock %}
+{% block content %}
+<!-- MAIN -->
+<div class="main">
+	<!-- MAIN CONTENT -->
+	<div class="main-content">
+		<div class="container-fluid">
+			<h3 class="page-title">Orders</h3>
+		
+
+			<!-- BASIC TABLE -->
+			<div class="panel">
+
+				<div class="panel-body">
+					<table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Userid</th>
+                <th>Amount</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Note</th>
+                <th>Ship Info</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.userid }}</td>
+                <td>{{ order.amount }}</td>
+                <td>{{ order.name }}</td>
+                <td>{{ order.phone }}</td>
+                <td>{{ order.note }}</td>
+                <td>{{ order.shipinfo }}</td>
+                <td>
+                    <a href="{{ path('admin_orders_show', {'id': order.id}) }}">
+                        <i  style="color:#27ae60" class="fa fa-eye"></i>
+                    </a>
+                </td>
+            </tr>
+       
+        {% endfor %}
+        </tbody>
+    </table>
+
+  
+      </div>
+    </div>
+
+{% endblock %}

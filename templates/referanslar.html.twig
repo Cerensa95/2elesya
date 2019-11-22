@@ -1,0 +1,49 @@
+   
+   <!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  {% block stylesheets %}{% endblock %}
+
+  <style>
+    .info {
+      margin-bottom: 10px;
+      padding: 20px 100px;
+
+    }
+
+    .sell-game { 
+      margin-top: 100px !important;
+      margin-bottom: 100px !important;
+    }
+
+    .info h3 {
+      border-bottom: 1px solid #15151569;
+      width: 40%;
+      margin-bottom: 10px;
+      padding-bottom: 20px;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+
+</head>
+
+<body>
+  {% include 'components/header.html.twig' %}
+    <div class="info">
+        <h3>Referances</h3>
+        {{ data.referances | raw}}
+      </div>
+
+      
+  
+  {% include 'components/footer.html.twig' %}
+
+  {% block body %}{% endblock %}
+  {% block javascripts %}{% endblock %}
+</body>
+
+</html>

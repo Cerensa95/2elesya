@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  {% block stylesheets %}{% endblock %}
+  <style>
+          
+/* SLİDER */
+
+.slider {
+  width: 500px;
+  height: 300px;
+}
+
+.carousel {
+  height: 100%;
+}
+
+.carousel-cell {
+  width: 500px; /* full width */
+  margin-right: 10px;
+}
+
+.slider-img {
+  width: 100%;
+  
+}
+
+.carousel-cell {
+  outline: none;
+}
+
+.flickity-page-dots {
+ display: none;
+}
+</style>
+</head>
+
+<body>
+  {% include 'components/header.html.twig' %}
+
+  <div class="container">
+    <div class="game-main">
+      <div class="game-title">
+        <h3>{{game.name}}</h3>
+      </div>
+      <div class="game-bottom">
+        <div class="game-left">
+          <!-- ***** SLIDER-START ****** -->
+          <div class="slider">
+            <div class="carousel" data-flickity='{ "autoPlay": true }'>
+              {% for image in images %}
+                 <div class="carousel-cell">
+                  <img class="slider-img" src="{{ asset('images') }}/{{image.image}}">
+                </div>
+              {% endfor %}
+            </div>
+        </div>
+        <!-- ***** SLIDER-END ****** -->
+        </div>
+        <div class="game-right">
+          <div class="seller">
+            <div class="seller-name">
+              saspegas
+            </div>
+            <div class="seller-rate">
+              99% | 6950 Satış
+            </div>
+          </div>
+          <div class="price">
+            {{minPrice.price}}.00 ₺
+          </div>
+          <div class="buy">
+            <a class="buy__btn" href="#buy">Satın Al</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="desc">
+      <h3 class="desc__title">Açıklama</h3>
+          {{game.description | raw}}
+        </div>
+
+    <div class="comments-wrapper">
+      <h3>Üye Yorumları</h3>
+
+      {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+       <form class="yorum-form" action="{{ path('yorum-yap')}}" method="POST">
+          <textarea name="comments[comment]" id="comment" cols="30" rows="3" placeholder="Yorumunuz"></textarea>
+         
+          <input type="hidden" name="token" value="{{ csrf_token('comment-form') }}">
+          <input type="hidden" name="gameID" value="{{ game.id }}">
+          <input type="hidden" name="comments[status]" value="false">
+          <input type="hidden" name="comments[username]" value="{{app.user.name}}">
+          <input type="hidden" name="comments[userid]" value="{{app.user.id}}">
+          <input type="hidden" name="comments[oyun_id]" value="{{ game.id }}">
+
+          <button class="btn-yorum" type="submit">Yorum Gönder</button>
+    
+        </form>
+        {% else %}
+        <a class="yorum-link" href="/login">Yorum göndermek için giriş yapın.</a>
+      {% endif %}
+
+        <div class="comments">
+            {% for comment in comments %}
+
+          <div class="comment">
+                <div class="comment__name">
+                  {{ comment.username }} <span class="dedi">dedi ki:</span>
+                </div>
+                <div class="comment__detay">
+                    {{ comment.comment }}
+                </div>
+          </div>
+							{% endfor %}
+
+        </div>
+    
+    </div>
+
+    <div class="other-seller">
+      <h2 id="buy" class="other-seller-title">Diğer Teklifler : {{sales|length}}</h2>
+      
+							{% for sale in sales %}
+
+
+
+
+              <div class="bottom-seller">
+                <div class="seller-left">
+                  <div class="other-seller-name">
+                   {{ sale.username }}
+               
+                  </div>
+                  <div class="other-seller-rate">
+                    95% | 652 Satış
+                  </div>
+                </div>
+                <div class="seller-center">
+                  <p class="other-seller-desc">
+                    {{sale.description}}
+                  </p>
+                </div>
+                <div class="seller-right">
+                  <div class="bottom-price">
+                   {{ sale.price }} ₺
+                  </div>
+                <form action="{{ path("shop_cart_new")}}" method="POST">
+                  <input type="hidden" name="productid" value="{{ sale.id }}">
+                  <input type="hidden" name="name" value="{{ sale.name}}">
+                  
+                  <input type="hidden" name="userid" value="1">
+                  <div class="other-buy">
+                    <button style="cursor:pointer" class="other-buy-btn" type="submit"><i style="color:white" class="fas fa-shopping-cart"></i></button>
+                  </div>
+                </form>
+
+                </div>
+              </div>
+
+							{% endfor %}
+
+
+    </div>
+  </div>
+
+  {% include 'components/footer.html.twig' %}
+
+  {% block body %}{% endblock %}
+  {% block javascripts %}{% endblock %}
+</body>
+
+</html>

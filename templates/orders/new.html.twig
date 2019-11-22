@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  {% block stylesheets %}{% endblock %}
+
+</head>
+
+<body>
+  {% include 'components/header.html.twig' %}
+
+  <div class="sell-game">
+ 
+    <h2 class="sell-game__title" style="margin-bottom: -50px">Satin Al</h2>
+
+{% block body %}
+
+    {{ include('orders/_form.html.twig') }}
+
+{% endblock %}

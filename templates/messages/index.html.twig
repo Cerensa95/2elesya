@@ -1,0 +1,48 @@
+{% extends 'admin_base.html.twig' %}
+
+
+{% block title %}Oyunlar{% endblock %}
+{% block content %}
+<!-- MAIN -->
+<div class="main">
+	<!-- MAIN CONTENT -->
+	<div class="main-content">
+		<div class="container-fluid">
+			<h3 class="page-title">Mesajlar</h3>
+
+			<!-- BASIC TABLE -->
+			<div class="panel">
+
+				<div class="panel-body">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Name</th>
+								<th>Email</th>
+								<th>Subject</th>
+								<th>Message</th>
+								<th>Comment</th>
+								<th>Status</th>
+								<th>Show</th>
+							</tr>
+						</thead>
+						<tbody>
+        {% for message in messages %}
+            <tr>
+                <td>{{ message.id }}</td>
+                <td>{{ message.name }}</td>
+                <td>{{ message.email }}</td>
+                <td>{{ message.subject }}</td>
+                <td>{{ message.message }}</td>
+                <td>{{ message.comment }}</td>
+                <td>{{ message.status }}</td>
+                <td>
+                    <a href="{{ path('messages_show', {'id': message.id}) }}"><i class="fa fa-eye"></i></a>
+                </td>
+            </tr>
+        {% else %}
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

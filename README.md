@@ -1,0 +1,1 @@
+# A symfony project for school

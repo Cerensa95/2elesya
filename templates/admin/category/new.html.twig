@@ -1,0 +1,51 @@
+{% extends 'admin_base.html.twig' %}
+
+
+{% block title %}Kategoriler{% endblock %}
+{% block content %}
+<!-- MAIN -->
+<div class="main">
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <div class="container-fluid">
+      <h3 class="page-title">Kategori Ekle</h3>
+
+      <div class="panel col-md-6">
+        <div class="panel-body">
+          <form method="post">
+             <label for="">Üst Kategori</label>
+            <select name="category[parentId]" class="form-control">
+              <option value="0">Ana Kategori</option>
+
+              {% for cat in catList %}
+              
+              <option value="{{ cat.id }}">{{ cat.name }}</option>
+
+              {% endfor %}
+            </select>
+            <br>
+            <input type="text" name="category[name]" class="form-control" placeholder="Kategori Adı" autocomplete="off">
+            <br>
+            <input type="text" name="category[keywords]" class="form-control" placeholder="Anahtar Kelimeler">
+            <br>
+            <input type="text" name="category[description]" class="form-control" placeholder="Açıklama">
+
+            <br>
+            <label for="">Status</label>
+            <select name="category[status]" class="form-control">
+              <option value="true">True</option>
+              <option value="false">False</option>
+            </select>
+
+            <button type="submit" class="btn btn-info" style="margin-top: 20px">Kaydet</button>
+          </form>
+        </div>
+
+      </div>
+      <!-- END BASIC TABLE -->
+
+    </div>
+  </div>
+</div>
+<!-- END MAIN -->
+{% endblock %}

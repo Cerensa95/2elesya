@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  {% block stylesheets %}{% endblock %}
+</head>
+
+<body>
+  <!DOCTYPE html>
+  <html lang="zxx">
+
+  <head>
+    <title>2ndHand Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+    <link rel="stylesheet" href="css/flickity.min.css">
+    <link rel="stylesheet" href="css/main.css">
+
+  </head>
+
+  <body>
+
+   {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+      <meta http-equiv="refresh" content="0;URL={{path('home')}}">
+    {% endif %}
+  <div class="form">
+      <header class="login-header">
+        <div class="logo">
+          <a href="/">
+            <img class="logo__img" src="./images/logo.png" alt=""></a>
+        </div>
+
+        <nav>
+          <a class="login-link" href="/login">Giriş Yap</a>
+          <a href="/register">Üye Ol</a>
+        </nav>
+      </header>
+<form class="login" method="post">
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+     <div class="form-group">
+        <i class="fas fa-envelope icon"></i>
+        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+
+    </div>
+    <div class="form-group">
+        <i class="fas fa-lock icon"></i>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+    </div>
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}"
+    >
+    <button class="btn btn-lg btn-primary" type="submit">
+        Sign in
+    </button>
+</form>
+</div>
+</div>
+
+
+    {% include 'components/footer.html.twig' %}
+
+    {% block body %}{% endblock %}
+    {% block javascripts %}{% endblock %}
+  </body>
+
+  </html>

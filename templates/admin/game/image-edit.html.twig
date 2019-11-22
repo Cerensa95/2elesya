@@ -1,0 +1,35 @@
+{% extends 'admin_base.html.twig' %}
+
+
+{% block content %}
+<!-- MAIN -->
+<div class="main">
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <div class="container-fluid">
+      <h3 class="page-title">{{game.name}}</h3>
+
+      <div class="panel col-md-6">
+
+        <div class="panel-body">
+          <form action="{{ path("image-edit", {'id': id} ) }}" method="POST" enctype="multipart/form-data">
+
+            <input type="number" name="gameid" value="{{ id }}" class="form-control">
+            <input type="file" name="imagename" class="form-control">
+            <br>
+            <button type="submit" class="btn btn-info" style="margin-top: 20px">Kaydet</button>
+          </form>
+            <br>
+          	{% if game.image != null %}
+								<img src="{{ asset('images') }}/{{game.image}}" alt="" height="200">
+						{% endif %}
+        </div>
+
+      </div>
+      <!-- END BASIC TABLE -->
+
+    </div>
+  </div>
+</div>
+<!-- END MAIN -->
+{% endblock %}

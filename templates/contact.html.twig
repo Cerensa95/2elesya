@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  {% block stylesheets %}{% endblock %}
+
+  <style>
+    .info {
+      margin-bottom: 10px;
+      padding: 20px 100px;
+
+    }
+
+    .sell-game { 
+      margin-top: 100px !important;
+      margin-bottom: 100px !important;
+    }
+
+    .sell-game__title {
+      text-align: center;
+      font-size: 50px;
+      font-weight: bold;
+      color: #333 !important;
+      margin-bottom: 30px;
+      margin-top: 30px;
+    }
+
+    .info h3 {
+      border-bottom: 1px solid #15151569;
+      width: 40%;
+      margin-bottom: 10px;
+      padding-bottom: 20px;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+
+</head>
+
+<body>
+  {% include 'components/header.html.twig' %}
+
+  <h2 class="sell-game__title">Bize Ulaşın</h2>
+  <div class="sell-game">
+ 
+    
+    <form class="sell-game-form" method="post">
+      <div class="form-item">
+        <label>Name</label>
+        <input  type="text" name="messages[name]" placeholder="Name">
+      </div>
+      <div class="form-item">
+        <label>Email</label>
+        <input  type="email" name="messages[email]" placeholder="E-mail">
+      </div>
+      <div class="form-item">
+        <label>Subject</label>
+        <input  type="text" name="messages[subject]" placeholder="Subject">
+        <input type="hidden" name="token" value="{{ csrf_token('form-message') }}" />
+      </div>
+      <div class="form-item">
+        <label>Messages</label>
+        <textarea rows="3" name="messages[message]" id="textarea"></textarea>
+        
+      </div>
+      <button class="sell-game__btn" type="submit">Kaydet</button>
+    </form>
+
+    
+  </div>
+
+
+  {% include 'components/footer.html.twig' %}
+
+  {% block body %}{% endblock %}
+  {% block javascripts %}{% endblock %}
+</body>
+
+</html>

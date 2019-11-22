@@ -1,0 +1,92 @@
+{% extends 'admin_base.html.twig' %}
+
+
+{% block content %}
+<!-- MAIN -->
+<div class="main">
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <div class="container-fluid">
+      <h3 class="page-title">Siparis Detay</h3>
+
+      <div class="panel col-md-6">
+
+        <div class="panel-body">
+          <label for="">ID:</label>
+                        <p >{{ order.id }}</p>
+            <br>
+            <label >Userid: </label>
+                        <p >{{ order.userid }}</p>
+            <br>
+            <label >Amount: </label>
+            <p >{{ order.amount }}</p>
+            <br>
+            <label for="">Name:</label>
+            <p >{{ order.name }}</p>
+            <br>
+
+            <label for="">Adress: </label>
+            <p >{{ order.address }}</p>
+            <br>
+
+            <label for="">City: </label>
+            <p >{{ order.city }}</p>
+            <br>
+          <form action="{{ path('admin_orders_update' , {'id': order.id }) }}" method="post">
+
+            <label for="">Ship Info:</label>
+            <textarea class="form-control" name="shipinfo" id="" cols="30" rows="3">
+                {{order.shipinfo}}
+            </textarea>
+            <br>
+            <label for="">Admin Note</label>
+            <textarea class="form-control" name="note" id="" cols="30" rows="3">
+                {{order.note}}
+            </textarea>
+            <br>
+            <label for="">Status</label>
+            <select name="status" class="form-control">
+                <option value="{{order.status}}">{{order.status}}</option>
+                <option value="canceled">Canceled</option>
+                <option value="accepted">Accepted</option>
+                <option value="inshipping">In Shipping</option>
+                <option value="completed">Completed</option>
+              </select>
+
+            <button type="submit" class="btn btn-info" style="margin-top: 20px">Kaydet</button>
+          </form>
+            
+          <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Product ID</th>
+                    <th>Price</th>
+                    <th>Toplam</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for detail in orderdetails %}
+                <tr>
+                    <td>{{ detail.id }}</td>
+                    <td>{{ detail.productid }}</td>
+                    <td>{{ detail.price }}</td>
+                    <td>{{ detail.amount }}</td>
+                    <td>{{ detail.status }}</td>
+                 
+                </tr>
+           
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+
+      </div>
+      <!-- END BASIC TABLE -->
+
+    </div>
+  </div>
+</div>
+<!-- END MAIN -->
+{% endblock %}

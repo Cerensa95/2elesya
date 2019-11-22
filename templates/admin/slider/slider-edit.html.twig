@@ -1,0 +1,36 @@
+{% extends 'admin_base.html.twig' %}
+
+
+{% block title %}Slider{% endblock %}
+{% block content %}
+<!-- MAIN -->
+<div class="main">
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <div class="container-fluid">
+      <h3 class="page-title">Oyun Düzenle</h3>
+
+      <div class="panel col-md-6">
+
+        <div class="panel-body">
+          <form method="post">
+            <input type="text" name="sliders[name]" class="form-control" placeholder="Oyun Adı" value="{{sliders.name}}">
+              <br>
+            <input type="number" name="sliders[price]" class="form-control" placeholder="Oyun Fiyatı" value="{{sliders.price}}">
+            <br>
+            <input type="text" name="sliders[image]" class="form-control" placeholder="Resim Yolu" value="{{sliders.image}}">
+
+            <input type="hidden" name="sliders[status]"  value="false">
+
+            <button type="submit" class="btn btn-info" style="margin-top: 20px">Kaydet</button>
+          </form>
+        </div>
+
+      </div>
+      <!-- END BASIC TABLE -->
+
+    </div>
+  </div>
+</div>
+<!-- END MAIN -->
+{% endblock %}

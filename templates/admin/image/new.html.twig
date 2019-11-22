@@ -1,0 +1,39 @@
+{% extends 'admin_base.html.twig' %}
+
+
+{% block title %}Resimler{% endblock %}
+{% block content %}
+<!-- MAIN -->
+<div class="main">
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <div class="container-fluid">
+      <h3 class="page-title">Resim Ekle</h3>
+
+      <div class="panel col-md-6">
+        <div class="panel-body">
+          <form method="post" enctype="multipart/form-data">
+             <label for="">Oyun Seç</label>
+              <select name="image[product_id]" class="form-control">
+                <option >Oyun Seç</option>
+                {% for game in games %}
+                  <option value="{{ game.id }}">{{ game.name }}</option>
+                  
+                {% endfor %}
+              </select>
+            <br>
+            <label for="">Oyun Resim</label>
+            <input type="file" name="imagename"  class="form-control">
+            <br>
+            <button type="submit" class="btn btn-info" style="margin-top: 20px">Kaydet</button>
+          </form>
+        </div>
+
+      </div>
+      <!-- END BASIC TABLE -->
+
+    </div>
+  </div>
+</div>
+<!-- END MAIN -->
+{% endblock %}

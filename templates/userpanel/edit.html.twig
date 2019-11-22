@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  {% block stylesheets %}{% endblock %}
+  <style>
+     #customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #df7d26;
+  color: white;
+}     
+
+</style>
+</head>
+
+<body>
+  {% include 'components/header.html.twig' %}
+
+  <div class="container">
+    <div class="game-main">
+      <div class="game-title">
+        <h3>Bilgilerim</h3>
+      </div>
+      <div class="game-bottom">
+        <div class="sidebar">
+             {{ include('user/usersidebar.html.twig') }}
+        </div>
+
+        <div class="panel-body">
+            <form method="post">
+            <label>Email</label>
+
+            <input type="text" name="email" value="{{user.email}}" class="form-control">
+            <br>
+            <br>
+            <label>Name</label>
+            
+            <input type="text" name="name" value="{{user.name}}" class="form-control">
+                <input type="hidden" name="status" value="{{user.status}}" class="form-control" disabled>
+
+            <input type="hidden" name="password" value="{{user.password}}" class="form-control">
+            <br>
+            <br>
+            <label>Türü</label>
+             <select name="roles" class="form-control" disabled>
+                {% for role in user.roles %}
+              
+                <option selected >{{ role }}</option>
+
+              {% endfor %}
+                <option value="ROLE_ADMIN">ROLE_ADMIN</option>
+                <option value="ROLE_USER">ROLE_USER</option>
+            </select>
+            <br>
+            <br>
+            <label>Address</label>
+            <input type="text" name="address" value="{{user.address}}" class="form-control">
+            <br>
+            <br>
+            <label>Phone</label>
+            <input type="text" name="phone" value="{{user.phone}}" class="form-control">
+            <br>
+            <br>
+            <label>City</label>
+            <select name="city" style="width:100%">
+                    <option value="{{user.city}}">{{user.city}}</option>
+                
+                    <option value="İstanbul">İstanbul</option>
+                    <option value="Ankara">Ankara</option>
+                    <option value="İzmir">İzmir</option>
+                    <option value="Adana">Adana</option>
+                    <option value="Adıyaman">Adıyaman</option>
+                    <option value="Afyonkarahisar">Afyonkarahisar</option>
+                    <option value="Ağrı">Ağrı</option>
+                    <option value="Aksaray">Aksaray</option>
+                    <option value="Amasya">Amasya</option>
+                    <option value="Antalya">Antalya</option>
+                    <option value="Ardahan">Ardahan</option>
+                    <option value="Artvin">Artvin</option>
+                    <option value="Aydın">Aydın</option>
+                    <option value="Balıkesir">Balıkesir</option>
+                    <option value="Bartın">Bartın</option>
+                    <option value="Batman">Batman</option>
+                    <option value="Bayburt">Bayburt</option>
+                    <option value="Bilecik">Bilecik</option>
+                    <option value="Bingöl">Bingöl</option>
+                    <option value="Bitlis">Bitlis</option>
+                    <option value="Bolu">Bolu</option>
+                    <option value="Burdur">Burdur</option>
+                    <option value="Bursa">Bursa</option>
+                    <option value="Çanakkale">Çanakkale</option>
+                    <option value="Çankırı">Çankırı</option>
+                    <option value="Çorum">Çorum</option>
+                    <option value="Denizli">Denizli</option>
+                    <option value="Diyarbakır">Diyarbakır</option>
+                    <option value="Düzce">Düzce</option>
+                    <option value="Edirne">Edirne</option>
+                    <option value="Elazığ">Elazığ</option>
+                    <option value="Erzincan">Erzincan</option>
+                    <option value="Erzurum">Erzurum</option>
+                    <option value="Eskişehir">Eskişehir</option>
+                    <option value="Gaziantep">Gaziantep</option>
+                    <option value="Giresun">Giresun</option>
+                    <option value="Gümüşhane">Gümüşhane</option>
+                    <option value="Hakkâri">Hakkâri</option>
+                    <option value="Hatay">Hatay</option>
+                    <option value="Iğdır">Iğdır</option>
+                    <option value="Isparta">Isparta</option>
+                    <option value="Kahramanmaraş">Kahramanmaraş</option>
+                    <option value="Karabük">Karabük</option>
+                    <option value="Karaman">Karaman</option>
+                    <option value="Kars">Kars</option>
+                    <option value="Kastamonu">Kastamonu</option>
+                    <option value="Kayseri">Kayseri</option>
+                    <option value="Kırıkkale">Kırıkkale</option>
+                    <option value="Kırklareli">Kırklareli</option>
+                    <option value="Kırşehir">Kırşehir</option>
+                    <option value="Kilis">Kilis</option>
+                    <option value="Kocaeli">Kocaeli</option>
+                    <option value="Konya">Konya</option>
+                    <option value="Kütahya">Kütahya</option>
+                    <option value="Malatya">Malatya</option>
+                    <option value="Manisa">Manisa</option>
+                    <option value="Mardin">Mardin</option>
+                    <option value="Mersin">Mersin</option>
+                    <option value="Muğla">Muğla</option>
+                    <option value="Muş">Muş</option>
+                    <option value="Nevşehir">Nevşehir</option>
+                    <option value="Niğde">Niğde</option>
+                    <option value="Ordu">Ordu</option>
+                    <option value="Osmaniye">Osmaniye</option>
+                    <option value="Rize">Rize</option>
+                    <option value="Sakarya">Sakarya</option>
+                    <option value="Samsun">Samsun</option>
+                    <option value="Siirt">Siirt</option>
+                    <option value="Sinop">Sinop</option>
+                    <option value="Sivas">Sivas</option>
+                    <option value="Şırnak">Şırnak</option>
+                    <option value="Tekirdağ">Tekirdağ</option>
+                    <option value="Tokat">Tokat</option>
+                    <option value="Trabzon">Trabzon</option>
+                    <option value="Tunceli">Tunceli</option>
+                    <option value="Şanlıurfa">Şanlıurfa</option>
+                    <option value="Uşak">Uşak</option>
+                    <option value="Van">Van</option>
+                    <option value="Yalova">Yalova</option>
+                    <option value="Yozgat">Yozgat</option>
+                    <option value="Zonguldak">Zonguldak</option>
+            </select>
+
+            <input type="hidden" name="token" value="{{ csrf_token('user-form')}}">
+         
+            <br>
+            <button type="submit" class="buy-btn" style="color:white;margin-top: 20px">Kaydet</button>
+          </form>
+ </div>
+       
+      </div>
+    </div>
+
+  {% include 'components/footer.html.twig' %}
+
+  {% block body %}{% endblock %}
+  {% block javascripts %}{% endblock %}
+</body>
+
+</html>

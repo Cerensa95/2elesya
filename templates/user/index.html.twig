@@ -1,0 +1,52 @@
+{% extends 'admin_base.html.twig' %}
+
+
+{% block title %}Oyunlar{% endblock %}
+{% block content %}
+<!-- MAIN -->
+<div class="main">
+	<!-- MAIN CONTENT -->
+	<div class="main-content">
+		<div class="container-fluid">
+			<h3 class="page-title">Kullanıcılar</h3>
+			<a href="{{ path('user_new') }}" class="btn btn-success mb-10" style="margin-bottom:20px"><i class="fa fa-plus"
+				 style="margin-right:10px"></i>Ekle</a>
+
+			<!-- BASIC TABLE -->
+			<div class="panel">
+
+				<div class="panel-body">
+					<table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Password</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    {% for role in user.roles %}
+                        {{ role }}
+                    {% endfor %}
+                </td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.status }}</td>
+                <td>
+                    <a href="{{ path('user_show', {'id': user.id}) }}">show</a>
+                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

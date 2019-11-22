@@ -1,0 +1,40 @@
+{% extends 'admin_base.html.twig' %}
+
+
+{% block title %}Oyunlar{% endblock %}
+{% block content %}
+<!-- MAIN -->
+<div class="main">
+	<!-- MAIN CONTENT -->
+	<div class="main-content">
+		<div class="container-fluid">
+			<h3 class="page-title">Resimler</h3>
+			<a href="{{ path('image_new') }}" class="btn btn-success mb-10" style="margin-bottom:20px"><i class="fa fa-plus"
+				 style="margin-right:10px"></i>Ekle</a>
+
+			<!-- BASIC TABLE -->
+			<div class="panel">
+
+				<div class="panel-body">
+					<table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Game</th>
+                <th>Image</th>
+                <th>Delete</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+        {% for image in images %}
+            <tr>
+                <td>{{ image.id }}</td>
+                <td>{{ image.name }}</td>
+                <td><img src="{{ asset('images') }}/{{image.image}}" alt="" height="40"></td>
+               <td><a href="{{ path("image_delete", {'id': image.id} ) }}" onclick="return confirm('Are you sure!');" ><i class="btn btn-danger fa fa-trash"></i></a> </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

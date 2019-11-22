@@ -1,0 +1,68 @@
+
+{% block content %}
+<!-- MAIN -->
+<div class="main">
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <div class="container-fluid">
+      <h2 class="page-title" style="color:#fff">Sipariş Bilgileri</h2>
+
+      <div class="panel col-md-6">
+
+        <div class="panel-body">
+
+            <form method="post" action="{{path('orders_new')}}">
+                <div class="form-item" style="margin-top: 20px">
+                    <label>Ödenecek Tutar : {{ total }} TL</label>
+                <input type="hidden" name="orders[amount]" value="{{total}}">
+                </div>
+                <div class="form-item">
+                    <label>Adi Soyadi</label>
+                <input type="text" name="orders[name]" value="{{ app.user.name }}" placeholder="Adi Soyadi">
+                </div>
+               <div class="form-item">
+                <label>Adres:</label>
+                <input type="text" name="orders[address]" value="{{app.user.address}}" placeholder="Address">
+               </div>
+                <div class="form-item">
+                    <label>Sehir:</label>
+                <input type="text" name="orders[city]" value="{{app.user.city}}" placeholder="Sehir">
+                </div>
+                <div class="form-item">
+                    <label>Telefon:</label>
+                <input type="text" name="orders[phone]" value="{{app.user.phone}}" placeholder="Phone">
+                </div>
+                <div class="form-item">
+                    <label>Note:</label>
+                <input type="text" name="orders[note]" placeholder="Not Ekleyin">
+                </div>
+               <div class="form-item">
+                <label>Adi Soyadi</label> 
+                <input type="text" placeholder="Kredi Karti Ad Soyad">
+               </div>
+              <div class="form-item">
+                <label>Kart Numarasi</label>
+                <input type="number" class="form-control" placeholder="0000 0000 0000 0000">
+              </div>
+               <div class="form-item">
+                <label>S.K.T</label> 
+                <input type="date" class="form-control" placeholder="AA/YY">
+               </div>
+              <div class="form-item">
+                <label>CVC</label> 
+                <input type="number" class="form-control" placeholder="123">
+              </div>
+              <input type="hidden" name="token" value="{{ csrf_token('form-order') }}">
+
+                <button type="submit" class="sell-game__btn" style="margin-top: 20px">Onayla</button>
+            </form>
+    </div>
+
+      </div>
+      <!-- END BASIC TABLE -->
+
+    </div>
+  </div>
+</div>
+<!-- END MAIN -->
+{% endblock %}

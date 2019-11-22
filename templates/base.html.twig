@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  {% block stylesheets %}{% endblock %}
+  <title> {{ data.title }} </title>
+
+
+
+  <style>
+    /* SLİDER */
+
+    .slider {
+      width: 1120px;
+      margin: 50px auto 0 auto;
+    }
+
+    .carousel {
+      border-radius: 10px;
+    }
+
+    .carousel-cell {
+      width: 100%;
+      height: 350px;
+      margin-right: 40px;
+      margin-right: 40px;
+      border-radius: 5px;
+      counter-increment: carousel-cell;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 100px;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .carousel-cell:before {
+      content: "";
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background-position: center;
+      background-size: cover;
+      filter: blur(4px);
+      left: 0;
+      top: 0%;
+      z-index: -999;
+      background: #e67e22;
+    }
+
+    .slider-img {
+      width: 30%;
+      transform: rotate(-20deg);
+      margin-right: 100px;
+    }
+
+    .slider-game {
+      margin-right: auto;
+      color: #fff;
+      text-transform: uppercase;
+    }
+
+    .slider-game__name {
+      font-size: 50px;
+      color: #191919 !important;
+    }
+
+    .slider-game__price {
+      margin-top: 20px;
+      font-size: 40px;
+      width: 180px;
+      text-align: center;
+      padding: 5px 10px;
+      border-radius: 5px;
+      background: #2ecc7073;
+    }
+
+    ul#menu-v,
+    #menu-v ul {
+      width: 200px;
+      /* Main Menu width */
+      border: 1px solid rgba(190, 190, 190, 0.3);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      z-index: 9;
+      position: sticky;
+      top: 20px;
+    }
+
+    #menu-v li {
+      margin: 0;
+      padding: 0;
+      position: relative;
+      background-color: #fff;
+      /*fallback color*/
+      background-color: #fff;
+      transition: background 0.5s;
+    }
+
+    #menu-v li:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    #menu-v a {
+      font: normal 12px Arial;
+      border-top: 1px solid rgba(190, 190, 190, 0.5);
+      display: block;
+      color: #191919;
+      text-decoration: none;
+      line-height: 30px;
+      padding-left: 22px;
+      position: relative;
+    }
+
+    #menu-v li:first-child a {
+      border-top: 0;
+    }
+
+    #menu-v a.arrow::after {
+      content: '';
+      position: absolute;
+      display: inline;
+      top: 50%;
+      margin-top: -4px;
+      right: 8px;
+      border-width: 4px;
+      border-style: solid;
+      border-color: transparent transparent transparent white;
+      transition: border-color 0.5s;
+    }
+
+    #menu-v li a.arrow:hover::after {
+      border-color: transparent transparent transparent #CCCCCC;
+    }
+
+    /*Sub level menu items
+---------------------------------------*/
+    #menu-v li ul {
+      min-width: 180px;
+      /* Sub level menu min width */
+      position: absolute;
+      display: none;
+      left: 100%;
+      top: 100%;
+      transform: translateY(-50%);
+    }
+
+    #menu-v li:hover>ul {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  {% include 'components/header.html.twig' %}
+
+  <!-- ***** SLIDER-START ****** -->
+  <div class="slider">
+    <div class="carousel" data-flickity='{ "autoPlay": true }'>
+      {% for slide in sliders %}
+      <div class="carousel-cell">
+        <img class="slider-img" src="{{ asset('images') }}/{{slide.image}}" alt="">
+        <div class="slider-game">
+          <div class="slider-game__name"><a class="slider-game__name" href="{{slide.url}}">{{slide.name}}</a></div>
+          <div class="slider-game__price">{{slide.price}} TL</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <!-- ***** SLIDER-END ****** -->
+
+  <div class="container">
+    <div class="main-content">
+      <div class="sidebar">
+        {% for cat in cats %}
+        {{ cat | raw}}
+        {% endfor %}
+      </div>
+      <div class="main">
+        {% for sale in sales %}
+
+       
+        <div class="product">
+          <a href="{{ path("game-detay", {'id': sale.id} ) }}">
+            <div class="product__top">
+              <img class="product__top--img" src="http://127.0.0.1:8000/images/27296300363c0c68e57dc3e28fd03690.jpeg" alt="">
+            </div>
+          </a>
+          <div class="product__bottom">
+            <div class="product__title">
+              <p>{{sale.name}}</p>
+            </div>
+            <div class="product__price">
+              <p>{{sale.price}}.00 ₺</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  </div>
+  {% include 'components/footer.html.twig' %}
+
+  {% block body %}{% endblock %}
+  {% block javascripts %}{% endblock %}
+</body>
+
+</html>

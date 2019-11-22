@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  {% block stylesheets %}{% endblock %}
+
+</head>
+
+<body>
+  {% include 'components/header.html.twig' %}
+
+  <div class="sell-game">
+ 
+    <h2 class="sell-game__title">Eşya Sat</h2>
+    <form class="sell-game-form" method="post">
+   
+      <div class="form-item">
+        <label>Oyun</label>
+        <select name="sales[oyunid]">
+							{% for cat in catList %}
+              <option value="{{cat.id}}">{{cat.name}}</option>
+							{% endfor %}
+        </select>
+        <input type="hidden" name="sales[username]" value="{{app.user.name}}">
+      </div>
+      
+      <div class="form-item">
+        <label>Açıklama</label>
+        <textarea name="sales[description]" name="" id="" cols="30" rows="5"></textarea>
+      </div>
+      <div class="form-item">
+        <label>Fiyatı</label>
+        <input name="sales[price]" type="number" name="price" placeholder="Oyun Fiyatı">
+        <input name="sales[status]" type="hidden" name="status" value="true">
+      </div>
+      <button class="sell-game__btn" type="submit">Kaydet</button>
+    </form>
+
+    
+  </div>
+
+
+  {% include 'components/footer.html.twig' %}
+
+  {% block body %}{% endblock %}
+  {% block javascripts %}{% endblock %}
+</body>
+
+</html>

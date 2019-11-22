@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+  <link rel="stylesheet" href="css/flickity.min.css">
+  <link rel="stylesheet" href="../css/main.css">
+    <link rel="icon" 
+      type="image/png" 
+      href="public/favicon.png">
+
+
+</head>
+
+
+<body>
+  <header class="header">
+    <div class="logo">
+      <a href="/">
+        <span>ikinci el</span> <br>
+        <span>eşya</span>
+        </a>
+    </div>
+
+    <nav>
+      
+
+      <a href="#">İletişim</a>
+      <a href="#">Hakkımızda</a>
+      <a href="#" style="margin-right: 40px;">Referanslar</a>
+
+      <a href="/contact">Bize Ulaşın</a>
+
+      {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <a href="/sell-product">Eşya Sat</a>
+        <a class="user" href="/userpanel">{{ app.user.email }}</a>
+        <a href="/shopcart" class="sepet">
+          <i style="color:#fff" class="fa fa-shopping-cart"></i>
+          </a>
+        <a href="{{ path('logout') }}"><i class="fa fa-sign-out-alt"></i></a>
+      {% else %}
+        <a href="/register">Üye Ol</a>
+        <a href="/login">Giriş Yap</a>
+      {% endif %}
+    </nav>
+  </header>

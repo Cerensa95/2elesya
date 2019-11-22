@@ -1,0 +1,62 @@
+{% extends 'admin_base.html.twig' %}
+
+
+{% block title %}Oyunlar{% endblock %}
+{% block content %}
+<!-- MAIN -->
+<div class="main">
+	<!-- MAIN CONTENT -->
+	<div class="main-content">
+		<div class="container-fluid">
+			<h3 class="page-title">Satıştaki Oyunlar</h3>
+
+			<!-- BASIC TABLE -->
+			<div class="panel">
+
+				<div class="panel-body">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Oyun ID</th>
+								<th>Price</th>
+								<th>Username</th>
+								<th>Description</th>
+								<th>Status</th>
+								<th>Delete</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for sale in sales %}
+							<tr>
+								<td>{{sale.id}}</td>
+								<td>{{sale.oyunId}}</td>
+								<td>{{sale.price}}</td>
+								<td>{{sale.username}}</td>
+								<td>{{sale.description}}</td>
+								{% if sale.status == "aktif" %}
+									<td>
+										<a class="aktif" href="#"></a>
+									</td>
+								{% elseif sale.status == "pasif" %}
+									<td>
+										<a class="pasif" href="#"></a>
+									</td>
+								{% else %}
+									<td>Null</td>
+								{% endif %}
+								<td><a href="{{ path("delete-game", {'id': sale.id} ) }}" onclick="return confirm('Are you sure!');" ><i class="btn btn-danger fa fa-trash"></i></a> </td>
+							</tr>
+
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- END BASIC TABLE -->
+
+		</div>
+	</div>
+</div>
+<!-- END MAIN -->
+{% endblock %}

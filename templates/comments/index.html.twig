@@ -1,0 +1,58 @@
+{% extends 'admin_base.html.twig' %}
+
+
+{% block title %}Commetns{% endblock %}
+{% block content %}
+<!-- MAIN -->
+<div class="main">
+	<!-- MAIN CONTENT -->
+	<div class="main-content">
+		<div class="container-fluid">
+			<h3 class="page-title">Comments</h3>
+		
+
+			<!-- BASIC TABLE -->
+			<div class="panel">
+
+				<div class="panel-body">
+					<table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Oyun_id</th>
+                <th>Comment</th>
+                <th>Status</th>
+                <th>Username</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for comment in comments %}
+            <tr>
+                <td>{{ comment.id }}</td>
+                <td>{{ comment.oyunId }}</td>
+                <td>{{ comment.comment }}</td>
+                
+                    {% if comment.status == "true" %}
+						<td>
+							<a href="{{ path("comments_edit", {'id': comment.id, 'status':'false'} ) }}" class="aktif" href="#"></a>
+						</td>
+					{% elseif comment.status == NULL %}
+						<td>
+							<a href="{{ path("comments_edit", {'id': comment.id, 'status':'true'} ) }}" class="pasif" href="#"></a>
+						</td>
+					{% endif %}
+                
+                <td>{{ comment.username }}</td>
+                <td>
+					<a href="{{ path("comments_delete", {'id': comment.id} ) }}" onclick="return confirm('Are you sure!');" ><i class="btn btn-danger fa fa-trash"></i></a>
+                   
+                </td>
+            </tr>
+        {% else %}
+         
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
