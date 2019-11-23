@@ -71,6 +71,7 @@
           <form action="{{ path("shop_cart_new")}}" method="POST">
                   <input type="hidden" name="productid" value="{{ product.id }}">
                   <input type="hidden" name="name" value="{{ product.name}}">
+                  <input type="hidden" name="price" value="{{ product.price}}">
                   
                   <input type="hidden" name="userid" value="1">
                   <div class="buy">

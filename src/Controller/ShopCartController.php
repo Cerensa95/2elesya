@@ -25,15 +25,9 @@ class ShopCartController extends Controller
         $user = $this->getUser();
 
         $id = $user->getid();
+        
+        $result = $shopCartRepository->findBy(['userid' => $id]);
 
-        $sql = "SELECT p.id, p.price, s.*
-                FROM shop_cart s, sales p
-                WHERE s.productid = p.id AND userid = :user";
-
-        $statement = $em->getConnection()->prepare($sql);
-        $statement->bindValue('user',$id);
-        $statement->execute();
-        $result = $statement->fetchAll();
 
 
 
@@ -52,7 +46,9 @@ class ShopCartController extends Controller
         $user = $this->getUser();
         $shopCart->setProductid($request->request->get('productid'));
         $shopCart->setName($request->request->get('name'));
+        $shopCart->setPrice($request->request->get('price'));
         $shopCart->setUserid($user->getid());
+
 
 
 

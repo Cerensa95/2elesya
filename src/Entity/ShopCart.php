@@ -36,6 +36,11 @@ class ShopCart
      */
     private $quantity;
 
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $price;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -83,6 +88,18 @@ class ShopCart
     public function setQuantity(?int $quantity): self
     {
         $this->quantity = $quantity;
+
+        return $this;
+    }
+
+    public function getPrice(): ?float
+    {
+        return $this->price;
+    }
+
+    public function setPrice(float $price): self
+    {
+        $this->price = $price;
 
         return $this;
     }

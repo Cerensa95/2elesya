@@ -15,6 +15,7 @@ class ShopCartType extends AbstractType
             ->add('userid')
             ->add('productid')
             ->add('quantity')
+            ->add('price')
         ;
     }
 
