@@ -49,6 +49,11 @@ class Sales
      */
     private $status;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $userid;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -134,6 +139,18 @@ class Sales
     public function setStatus(string $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getUserid(): ?int
+    {
+        return $this->userid;
+    }
+
+    public function setUserid(int $userid): self
+    {
+        $this->userid = $userid;
 
         return $this;
     }
