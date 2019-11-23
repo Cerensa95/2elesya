@@ -24,7 +24,6 @@
 								<th>Image</th>
 								<th>Price</th>
 								<th>Status</th>
-								<th>Category</th>
 								<th>Edit</th>
 								<th>Delete</th>
 							</tr>
@@ -53,7 +52,7 @@
 									</td>
 								{% endif %}
 								
-								<td>PS4</td>
+								
 								<td><a href="{{ path("edit-sale", {'id': sale.id} ) }}"><i class="btn btn-primary fa fa-edit"></i></a></td>
 								<td><a href="{{ path("delete-sale", {'id': sale.id} ) }}" onclick="return confirm('Are you sure!');" ><i class="btn btn-danger fa fa-trash"></i></a> </td>
 							</tr>

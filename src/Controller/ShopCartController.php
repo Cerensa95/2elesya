@@ -19,17 +19,19 @@ class ShopCartController extends Controller
      * @Route("/", name="shop_cart_index", methods="GET")
      */
     public function index(ShopCartRepository $shopCartRepository): Response
-    {   
+    {
         $em = $this->getDoctrine()->getManager();
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY'); // login controll
         $user = $this->getUser();
+
         $id = $user->getid();
 
-        $sql = "SELECT p.oyun_id, p.price, s.* FROM shop_cart s, sales p
-                WHERE s.productid = p.id AND userid = :userid";
+        $sql = "SELECT p.id, p.price, s.*
+                FROM shop_cart s, sales p
+                WHERE s.productid = p.id AND userid = :user";
 
         $statement = $em->getConnection()->prepare($sql);
-        $statement->bindValue('userid',$id);
+        $statement->bindValue('user',$id);
         $statement->execute();
         $result = $statement->fetchAll();
 
@@ -46,7 +48,7 @@ class ShopCartController extends Controller
         $shopCart = new ShopCart();
         $form = $this->createForm(ShopCartType::class, $shopCart);
         $form->handleRequest($request);
-        
+
         $user = $this->getUser();
         $shopCart->setProductid($request->request->get('productid'));
         $shopCart->setName($request->request->get('name'));

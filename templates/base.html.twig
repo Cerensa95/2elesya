@@ -159,6 +159,7 @@
   <div class="slider">
     <div class="carousel" data-flickity='{ "autoPlay": true }'>
       {% for slide in sliders %}
+      {% if (slide.status == "true") and  slide.userid != app.user.id %}
       <div class="carousel-cell">
         <img class="slider-img" src="http://127.0.0.1:8000/images/27296300363c0c68e57dc3e28fd03690.jpeg" alt="">
         <div class="slider-game">
@@ -166,6 +167,7 @@
           <div class="slider-game__price">{{slide.price}} TL</div>
         </div>
       </div>
+      {% endif %}
       {% endfor %}
     </div>
   </div>
@@ -181,7 +183,7 @@
       <div class="main">
         {% for sale in sales %}
 
-       {% if sale.status == "true" %}
+       {% if (sale.status == "true") and  sale.userid != app.user.id %}
         <div class="product">
           <a href="{{ path("urun-detay", {'id': sale.id} ) }}">
             <div class="product__top">

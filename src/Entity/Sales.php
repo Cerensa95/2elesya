@@ -16,14 +16,6 @@ class Sales
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $oyunId;
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $username;
      /**
      * @ORM\Column(type="string", length=255)
      */
@@ -59,18 +51,6 @@ class Sales
         return $this->id;
     }
 
-    public function getOyunId(): ?string
-    {
-        return $this->oyunId;
-    }
-
-    public function setOyunId(string $oyunId): self
-    {
-        $this->oyunId = $oyunId;
-
-        return $this;
-    }
-
     public function getCategory(): ?string
     {
         return $this->category;
@@ -103,18 +83,6 @@ class Sales
     public function setPrice(float $price): self
     {
         $this->price = $price;
-
-        return $this;
-    }
-
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
 
         return $this;
     }

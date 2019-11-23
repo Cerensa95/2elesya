@@ -62,18 +62,21 @@
         <div class="game-right">
           <div class="seller">
             <div class="seller-name">
-              saspegas
-            </div>
-            <div class="seller-rate">
-              99% | 6950 Satış
+              {{user.name}}
             </div>
           </div>
           <div class="price">
             {{product.price}}.00 ₺
           </div>
-          <div class="buy">
-            <a class="buy__btn" href="#buy">Satın Al</a>
-          </div>
+          <form action="{{ path("shop_cart_new")}}" method="POST">
+                  <input type="hidden" name="productid" value="{{ product.id }}">
+                  <input type="hidden" name="name" value="{{ product.name}}">
+                  
+                  <input type="hidden" name="userid" value="1">
+                  <div class="buy">
+                    <button class="buy__btn" style="cursor:pointer" type="submit"><i style="color:white" class="fas fa-shopping-cart"></i> Satın Al</button>
+                  </div>
+                </form>
         </div>
       </div>
     </div>

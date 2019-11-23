@@ -15,9 +15,9 @@ class SalesType extends AbstractType
             ->add('category')
             ->add('description')
             ->add('price')
-            ->add('username')
             ->add('status')
             ->add('name')
+            ->add('userid')
         ;
     }
 

@@ -143,15 +143,10 @@ class GameController extends Controller
        $form = $this->createForm(SalesType::class, $sale);
        $form->handleRequest($request);
        
-       $games = $this -> getDoctrine()->getRepository(Games::class)->findAll();  
+        $sale->setStatus("false");
 
         //Save to DATABASE
         if($form->isSubmitted()) {
-            $gameID = $request->request->get('sales')['oyunid']; 
-            $game = $this -> getDoctrine()->getRepository(Games::class)->findBy(['id' => $gameID]);
-            //$gameName = $game[0]->getName();
-            //$sale->setName($gameName);
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($sale);
             $em->flush();

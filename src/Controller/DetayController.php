@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Entity\Sales;
 use App\Entity\Image;
 use App\Entity\Comments;
+use App\Entity\User;
 
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -21,13 +22,14 @@ class DetayController extends Controller
     {
         $product=$this->getDoctrine()->getRepository(Sales::class)->find($id);
         $images = $this->getDoctrine()->getRepository(Image::class)->findBy(["product_id" => $id]);
-        $comments = $this -> getDoctrine()->getRepository(Comments::class)->findBy(array('status' => "true", 'oyun_id' => $id));
-        
-        
+        $comments = $this -> getDoctrine()->getRepository(Comments::class)->findBy(array('status' => "true", 'oyun_id' => $id));        
+        $user = $this->getDoctrine()->getRepository(User::class)->find($product->getUserId());
+
         return $this->render('urun-detay.html.twig', [
             'product'=>$product,
             'images' => $images,
             'comments' => $comments,
+            'user' => $user
         ]);
     }
 }
