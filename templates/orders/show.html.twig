@@ -56,7 +56,7 @@
                         <td>{{ order.userid }}</td>
                     </tr>
                     <tr>
-                        <th>Amount</th>
+                        <th>Toplam Tutar</th>
                         <td>{{ order.amount }}</td>
                     </tr>
                     <tr>
@@ -96,8 +96,6 @@
                         <th>Id</th>
                         <th>Name</th>
                         <th>Price</th>
-                        <th>Toplam</th>
-                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -105,10 +103,7 @@
                     <tr>
                         <td>{{ detail.id }}</td>
                         <td>{{ detail.name }}</td>
-                        <td>{{ detail.price }}</td>
-                        <td>{{ detail.amount }}</td>
-                        <td>{{ detail.status }}</td>
-                     
+                        <td>{{ detail.quantity }}</td>
                     </tr>
                
                 {% endfor %}

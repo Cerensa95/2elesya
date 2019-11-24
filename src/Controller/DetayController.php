@@ -22,7 +22,7 @@ class DetayController extends Controller
     {
         $product=$this->getDoctrine()->getRepository(Sales::class)->find($id);
         $images = $this->getDoctrine()->getRepository(Image::class)->findBy(["product_id" => $id]);
-        $comments = $this -> getDoctrine()->getRepository(Comments::class)->findBy(array('status' => "true", 'oyun_id' => $id));        
+        $comments = $this -> getDoctrine()->getRepository(Comments::class)->findBy(array('status' => "true", 'userid' => $product->getUserId()));        
         $user = $this->getDoctrine()->getRepository(User::class)->find($product->getUserId());
 
         return $this->render('urun-detay.html.twig', [

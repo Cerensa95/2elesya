@@ -91,19 +91,19 @@
       <h3>Üye Yorumları</h3>
 
       {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-       {# <form class="yorum-form" action="{{ path('yorum-yap')}}" method="POST">
+       <form class="yorum-form" action="{{ path('yorum-yap')}}" method="POST">
           <textarea name="comments[comment]" id="comment" cols="30" rows="3" placeholder="Yorumunuz"></textarea>
          
           <input type="hidden" name="token" value="{{ csrf_token('comment-form') }}">
-          <input type="hidden" name="gameID" value="{{ game.id }}">
+   
           <input type="hidden" name="comments[status]" value="false">
           <input type="hidden" name="comments[username]" value="{{app.user.name}}">
-          <input type="hidden" name="comments[userid]" value="{{app.user.id}}">
-          <input type="hidden" name="comments[oyun_id]" value="{{ game.id }}">
+          <input type="hidden" name="comments[userid]" value="{{product.userid}}">
+          <input type="hidden" name="urun_id" value="{{ product.id }}">
 
           <button class="btn-yorum" type="submit">Yorum Gönder</button>
     
-        </form> #}
+        </form>
         {% else %}
         <a class="yorum-link" href="/login">Yorum göndermek için giriş yapın.</a>
       {% endif %}

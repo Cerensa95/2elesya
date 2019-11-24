@@ -150,9 +150,9 @@ class FrontController extends Controller
     public function yorumlarim(Request $request, CommentsRepository $commentsRepo): Response
     {
         $user = $this->getUser();
-        $userid = $user->getid();
+        $username = $user->getName();
 
-        return $this->render('yorumlarim.html.twig', ['comments' => $commentsRepo->findBy(['userid'=>$userid])]);
+        return $this->render('yorumlarim.html.twig', ['comments' => $commentsRepo->findBy(['username'=>$username])]);
 
     }
 
@@ -165,28 +165,24 @@ class FrontController extends Controller
         $comment = new Comments();
         $form = $this->createForm(CommentsType::class, $comment);
         $form->handleRequest($request);
-        $gameID = $request->get('gameID');
+        $urunID = $request->get('urun_id');
 
-        $submittedToken = $request->request->get('token');
-        
-       
+
+
+        $comment->setStatus("false");
 
         if($request->isMethod('POST')) {
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
             $em->flush();
-
-            return $this->redirectToRoute('game-detay', array('id' => $gameID));
+            return $this->redirectToRoute('urun-detay', array('id' => $urunID));
         }
-    
 
         return $this->render('comments/new.html.twig', [
             'comment' => $comment,
             'form' => $form->createView(),
         ]);
     }
-
-
 }
 
