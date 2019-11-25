@@ -159,15 +159,29 @@
   <div class="slider">
     <div class="carousel" data-flickity='{ "autoPlay": true }'>
       {% for slide in sliders %}
-      {% if (slide.status == "true") and  slide.userid != app.user.id %}
+      {% if  app.user %}
+      {% if  slide.userid != app.user.id and (slide.status == "true")  %}
       <div class="carousel-cell">
         <img class="slider-img" src="http://127.0.0.1:8000/images/27296300363c0c68e57dc3e28fd03690.jpeg" alt="">
         <div class="slider-game">
-          <div class="slider-game__name"><a class="slider-game__name" href="{{ path("urun-detay", {'id': slide.id} ) }}">{{slide.name}}</a></div>
+          <div class="slider-game__name"><a class="slider-game__name"
+              href="{{ path("urun-detay", {'id': slide.id} ) }}">{{slide.name}}</a></div>
           <div class="slider-game__price">{{slide.price}} TL</div>
         </div>
       </div>
       {% endif %}
+      {% endif %}
+      {% if  app.user == null %}
+      <div class="carousel-cell">
+        <img class="slider-img" src="http://127.0.0.1:8000/images/27296300363c0c68e57dc3e28fd03690.jpeg" alt="">
+        <div class="slider-game">
+          <div class="slider-game__name"><a class="slider-game__name"
+              href="{{ path("urun-detay", {'id': slide.id} ) }}">{{slide.name}}</a></div>
+          <div class="slider-game__price">{{slide.price}} TL</div>
+        </div>
+      </div>
+      {% endif %}
+
       {% endfor %}
     </div>
   </div>
@@ -183,11 +197,13 @@
       <div class="main">
         {% for sale in sales %}
 
-       {% if (sale.status == "true") and  sale.userid != app.user.id %}
+        {% if  app.user %}
+        {% if (sale.status == "true") and  sale.userid != app.user.id %}
         <div class="product">
           <a href="{{ path("urun-detay", {'id': sale.id} ) }}">
             <div class="product__top">
-              <img class="product__top--img" src="http://127.0.0.1:8000/images/27296300363c0c68e57dc3e28fd03690.jpeg" alt="">
+              <img class="product__top--img" src="http://127.0.0.1:8000/images/27296300363c0c68e57dc3e28fd03690.jpeg"
+                alt="">
             </div>
           </a>
           <div class="product__bottom">
@@ -199,7 +215,28 @@
             </div>
           </div>
         </div>
-          {% endif %}
+        {% endif %}
+        {% endif %}
+
+        {% if  app.user == null %}
+        <div class="product">
+          <a href="{{ path("urun-detay", {'id': sale.id} ) }}">
+            <div class="product__top">
+              <img class="product__top--img" src="http://127.0.0.1:8000/images/27296300363c0c68e57dc3e28fd03690.jpeg"
+                alt="">
+            </div>
+          </a>
+          <div class="product__bottom">
+            <div class="product__title">
+              <p>{{sale.name}}</p>
+            </div>
+            <div class="product__price">
+              <p>{{sale.price}}.00 ₺</p>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
         {% endfor %}
       </div>
     </div>

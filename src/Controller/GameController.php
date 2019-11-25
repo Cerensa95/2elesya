@@ -145,8 +145,24 @@ class GameController extends Controller
        
         $sale->setStatus("false");
 
+    
+
         //Save to DATABASE
         if($form->isSubmitted()) {
+
+
+            $file = $request->files->get('imagename');
+
+            dump($file);
+            die();
+
+        
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+            $file->move($this->getParameter('images_directory'), $fileName);
+
+            $sale->setImage($fileName); 
+
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($sale);
             $em->flush();
