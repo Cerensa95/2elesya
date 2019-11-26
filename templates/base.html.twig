@@ -162,7 +162,7 @@
       {% if  app.user %}
       {% if  slide.userid != app.user.id and (slide.status == "true")  %}
       <div class="carousel-cell">
-        <img class="slider-img" src="http://127.0.0.1:8000/images/27296300363c0c68e57dc3e28fd03690.jpeg" alt="">
+        <img class="slider-img"src="{{ asset('images') }}/{{slide.image}}" alt="">
         <div class="slider-game">
           <div class="slider-game__name"><a class="slider-game__name"
               href="{{ path("urun-detay", {'id': slide.id} ) }}">{{slide.name}}</a></div>
@@ -173,7 +173,7 @@
       {% endif %}
       {% if  app.user == null %}
       <div class="carousel-cell">
-        <img class="slider-img" src="http://127.0.0.1:8000/images/27296300363c0c68e57dc3e28fd03690.jpeg" alt="">
+        <img class="slider-img"src="{{ asset('images') }}/{{slide.image}}" alt="">
         <div class="slider-game">
           <div class="slider-game__name"><a class="slider-game__name"
               href="{{ path("urun-detay", {'id': slide.id} ) }}">{{slide.name}}</a></div>
@@ -202,7 +202,7 @@
         <div class="product">
           <a href="{{ path("urun-detay", {'id': sale.id} ) }}">
             <div class="product__top">
-              <img class="product__top--img" src="http://127.0.0.1:8000/images/27296300363c0c68e57dc3e28fd03690.jpeg"
+              <img class="product__top--img" src="{{ asset('images') }}/{{sale.image}}"
                 alt="">
             </div>
           </a>
@@ -222,7 +222,7 @@
         <div class="product">
           <a href="{{ path("urun-detay", {'id': sale.id} ) }}">
             <div class="product__top">
-              <img class="product__top--img" src="http://127.0.0.1:8000/images/27296300363c0c68e57dc3e28fd03690.jpeg"
+              <img class="product__top--img" src="{{ asset('images') }}/{{sale.image}}"
                 alt="">
             </div>
           </a>

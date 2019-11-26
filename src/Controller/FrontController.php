@@ -2,25 +2,18 @@
 
 namespace App\Controller;
 
-use App\Entity\Games;
-use App\Entity\Sliders;
 use App\Entity\User;
 use App\Entity\Comments;
-use App\Entity\ShopCart;
 use App\Entity\Sales;
-
 
 use App\Form\UserType;
 use App\Form\CommentsType;
 
-
-use App\Entity\Admin\Category;
 use App\Repository\CategoryRepository;
 use App\Repository\SettingRepository;
 use App\Repository\UserRepository;
 use App\Repository\CommentsRepository;
-
-
+use App\Repository\SalesRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -34,15 +27,18 @@ class FrontController extends Controller
     public function index(SettingRepository $settingRepository)
     {   
 
+        $em=$this->getDoctrine()->getManager();
+        $sql= "SELECT * FROM sales WHERE status='true' ORDER BY ID DESC LIMIT 5";
+        $statement= $em->getConnection()->prepare($sql);
+
+        $statement->execute();
+        $sliders=$statement->fetchAll();
+        
         $sales = $this -> getDoctrine()->getRepository(Sales::class)->findAll();  
-        $sliders =$this -> getDoctrine()->getRepository(Sales::class)->findAll();
         $data = $settingRepository->findAll();
 
         $cats = $this->categoryList();
         $cats[0] = '<ul id="menu-v">';
-
-
-
 
         return $this->render('default/index.html.twig', [
             'sales' => $sales,
@@ -147,13 +143,23 @@ class FrontController extends Controller
     /**
      * @Route("/yorumlarim", name="yorumlarim", methods="GET|POST")
      */
-    public function yorumlarim(Request $request, CommentsRepository $commentsRepo): Response
+    public function yorumlarim(CommentsRepository $commentsRepo): Response
     {
         $user = $this->getUser();
         $username = $user->getName();
 
         return $this->render('yorumlarim.html.twig', ['comments' => $commentsRepo->findBy(['username'=>$username])]);
+    }
 
+     /**
+     * @Route("/urunlerim", name="urunlerim", methods="GET|POST")
+     */
+    public function urunlerim(SalesRepository $salesRepository): Response
+    {
+        $user = $this->getUser();
+        $userid = $user->getId();
+
+        return $this->render('urunlerim.html.twig', ['products' => $salesRepository->findBy(['userid'=>$userid])]);
     }
 
     /**
@@ -166,8 +172,6 @@ class FrontController extends Controller
         $form = $this->createForm(CommentsType::class, $comment);
         $form->handleRequest($request);
         $urunID = $request->get('urun_id');
-
-
 
         $comment->setStatus("false");
 
