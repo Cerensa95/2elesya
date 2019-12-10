@@ -224,7 +224,6 @@ class GameController extends Controller
     {  
         
         $data = $settingRepository->findAll();
-        
         return $this->render('hakkimizda.html.twig', [
             'data' => $data[0],
         ]);
