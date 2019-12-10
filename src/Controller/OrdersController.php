@@ -68,7 +68,7 @@ class OrdersController extends Controller
                     $orderdetail -> setOrderid($orderid);
                     $orderdetail -> setUserid($user->getid());
                     $orderdetail -> setProductid($user->getid());
-                    $orderdetail -> setPrice(232);
+                    $orderdetail -> setPrice($item["price"]);
                     $orderdetail -> setQuantity($item["total"]);
                     $orderdetail -> setAmount($item["total"]);
                     $orderdetail -> setName($item["name"]);

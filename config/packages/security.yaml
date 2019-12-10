@@ -23,7 +23,7 @@ security:
                     - App\Security\AppUserAuthAuthenticator
             logout:
                 path: logout
-                target: /login
+                target: /
 
             # activate different ways to authenticate
 

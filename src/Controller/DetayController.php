@@ -7,6 +7,8 @@ use App\Entity\Sales;
 use App\Entity\Image;
 use App\Entity\Comments;
 use App\Entity\User;
+use App\Entity\UserImage;
+
 
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -21,7 +23,7 @@ class DetayController extends Controller
 
     {
         $product=$this->getDoctrine()->getRepository(Sales::class)->find($id);
-        $images = $this->getDoctrine()->getRepository(Image::class)->findBy(["product_id" => $id]);
+        $images = $this->getDoctrine()->getRepository(UserImage::class)->findBy(["product_id" => $id]);
         $comments = $this -> getDoctrine()->getRepository(Comments::class)->findBy(array('status' => "true", 'userid' => $product->getUserId()));        
         $user = $this->getDoctrine()->getRepository(User::class)->find($product->getUserId());
 

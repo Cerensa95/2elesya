@@ -33,7 +33,6 @@ class ImageController extends Controller
 
 
         $image = new Image();
-        $games = $this -> getDoctrine()->getRepository(Games::class)->findAll();  
         $form = $this->createForm(ImageType::class, $image);
         $form->handleRequest($request);
 
@@ -42,11 +41,6 @@ class ImageController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             $produtId = $request->request->get('image')['product_id'];
-            $game = $this -> getDoctrine()->getRepository(Games::class)->findBy(["id"=> $produtId]);
-            $oyunName = $game[0]->getName();
-
-            $image->setName($oyunName);
-
             $file = $request->files->get('imagename');
             $fileName = md5(uniqid()).'.'.$file->guessExtension();
          
@@ -62,9 +56,8 @@ class ImageController extends Controller
             return $this->redirectToRoute('image_index');
         }
 
-        return $this->render('admin/image/new.html.twig', [
+        return $this->render('resimekle.html.twig', [
             'image' => $image,
-            'games' => $games,
             'form' => $form->createView(),
         ]);
     }

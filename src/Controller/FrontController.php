@@ -5,10 +5,13 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Comments;
 use App\Entity\Sales;
+use App\Entity\Image;
+use App\Entity\UserImage;
+use App\Form\ImageType;
 
 use App\Form\UserType;
 use App\Form\CommentsType;
-
+use App\Form\UserImageType;
 use App\Repository\CategoryRepository;
 use App\Repository\SettingRepository;
 use App\Repository\UserRepository;
@@ -94,7 +97,7 @@ class FrontController extends Controller
         $statement->execute();
         $products = $statement->fetchAll();
         
-        return $this->render('list-games.html.twig', [
+        return $this->render('list-products.html.twig', [
             'products' => $products,
             'data' => $data,
             'cats' => $cats,
@@ -188,5 +191,7 @@ class FrontController extends Controller
             'form' => $form->createView(),
         ]);
     }
+
+   
 }
 

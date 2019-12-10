@@ -31,6 +31,10 @@
 }     
 
 </style>
+
+  <script language="JavaScript" type="text/javascript">
+    function openWin(windowURL, windowName, windowFeatures) { window.open(windowURL, windowName, windowFeatures); }
+  </script>
 </head>
 
 <body>
@@ -62,7 +66,11 @@
                 <td><img style="height: 40px;" src="{{ asset('images') }}/{{product.image}}" alt=""></td>
                 <td>{{ product.name }}</td>
                 <td>{{ product.price }} TL</td>
-                <td> <a class="btn btn-success" href="#">Ekle</a> </td>
+                <td>
+                  <a class="btn btn-success" href="javascript:openWin('{{ path('user_image_new',{'pid':product.id}) }}','','toolbar=no,location=no,directories=0,status=no,top=100,left=200,menuBar=no,scrollBars=no,resizable=no,width=600,height=500');">
+                      Detay Resmi Ekle
+                  </a>
+                </td>
             </tr>
        
         {% endfor %}

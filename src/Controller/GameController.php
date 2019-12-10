@@ -202,4 +202,46 @@ class GameController extends Controller
         ]);
        
     }
+
+    /**
+     * @Route("/iletisim", name="iletisim", methods="GET|POST")
+     */
+    public function iletisim(SettingRepository $settingRepository): Response
+    {  
+        
+        $data = $settingRepository->findAll();
+        
+        return $this->render('iletisim.html.twig', [
+            'data' => $data[0],
+        ]);
+       
+    }
+
+    /**
+     * @Route("/hakkimizda", name="aboutus", methods="GET|POST")
+     */
+    public function aboutus(SettingRepository $settingRepository): Response
+    {  
+        
+        $data = $settingRepository->findAll();
+        
+        return $this->render('hakkimizda.html.twig', [
+            'data' => $data[0],
+        ]);
+       
+    }
+
+    /**
+     * @Route("/referans", name="referans", methods="GET|POST")
+     */
+    public function referans(SettingRepository $settingRepository): Response
+    {  
+        
+        $data = $settingRepository->findAll();
+        
+        return $this->render('referanslar.html.twig', [
+            'data' => $data[0],
+        ]);
+       
+    }
 }
