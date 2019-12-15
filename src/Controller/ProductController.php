@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Games;
 use App\Entity\Sales;
 use App\Entity\Messages;
-use App\Entity\Admin\Category;
 use App\Repository\CategoryRepository;
 use App\Repository\SettingRepository;
 
@@ -20,19 +19,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class GameController extends Controller
+class ProductController extends Controller
 {
-    /**
-     * @Route("/admin/Ürünler", name="Ürünler")
-     */
-    public function index()
-    {   
-        $games = $this -> getDoctrine()->getRepository(Games::class)->findAll();  
-        return $this->render('admin/game/games.html.twig', [
-            'games' => $games,
-        ]);
-    }
-
+    
     /**
      * @Route("/admin/sales", name="sales")
      */
@@ -138,14 +127,12 @@ class GameController extends Controller
      */
     public function addSelingGame(Request $request, CategoryRepository $catRepo): Response
     { 
-       $catList = $catRepo->findAll();  
-       $sale = new Sales();
-       $form = $this->createForm(SalesType::class, $sale);
-       $form->handleRequest($request);
+        $catList = $catRepo->findAll();  
+        $sale = new Sales();
+        $form = $this->createForm(SalesType::class, $sale);
+        $form->handleRequest($request);
        
         $sale->setStatus("false");
-
-    
 
         //Save to DATABASE
         if($form->isSubmitted()) {
