@@ -14,8 +14,12 @@
 
         <div class="panel-body">
 
-<form method="post">
+        <form method="post">
             <input type="text" name="setting[title]" value="{{setting.title}}" class="form-control" placeholder="Title">
+            <br>
+            <input type="text" name="setting[phone]" value="{{setting.phone}}" class="form-control" placeholder="Phone">
+            <br>
+            <input type="hidden" name="setting[status]" value="true" class="form-control" placeholder="Status">
             <br>
             <input type="text" name="setting[description]" value="{{setting.description}}" class="form-control" placeholder="Description">
             <br>

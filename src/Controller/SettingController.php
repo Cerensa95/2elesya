@@ -75,8 +75,13 @@ class SettingController extends Controller
         $form = $this->createForm(SettingType::class, $setting);
         $form->handleRequest($request);
 
+        //dump($request);
+          //  die();
+
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            
 
             $this->getDoctrine()->getManager()->flush();
 
