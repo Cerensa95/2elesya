@@ -33,6 +33,7 @@ class UserController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // save to database
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
@@ -62,11 +63,9 @@ class UserController extends Controller
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
-
+        
         if ($form->isSubmitted()) {
-
             $this->getDoctrine()->getManager()->flush();
-
             return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
         }
 

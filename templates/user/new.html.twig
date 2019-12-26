@@ -12,25 +12,25 @@
       <div class="panel col-md-6">
 
         <div class="panel-body">
-<form method="post">
-            <label>Email</label>
+          <form method="post">
+              <label>Email</label>
 
-            <input type="text" name="user[email]" value="{{user.email}}" class="form-control" placeholder="Kategori İsmi">
-            <br>
-            <label>Name</label>
-            
-            <input type="text" name="user[name]" value="{{user.name}}" class="form-control" placeholder="Keywords">
-            <br>
-            <label>Password</label>
+              <input type="email" name="user[email]" value="{{user.email}}" class="form-control" placeholder="email">
+              <br>
+              <label>Name</label>
+              
+              <input type="text" name="user[name]" value="{{user.name}}" class="form-control" placeholder="Keywords">
+              <br>
+              <label>Password</label>
 
-            <input type="text" name="user[password]" value="{{user.password}}" class="form-control" placeholder="Description">
-            <label>Türü</label>
-            <select name="user[roles]" class="form-control">
-                <option value="ROLE_ADMIN">ROLE_ADMIN</option>
-                <option value="ROLE_USER">ROLE_USER</option>
-            </select>
-            
-            <br>
-            <button type="submit" class="btn btn-info" style="margin-top: 20px">Kaydet</button>
+              <input type="text" name="user[password]" value="{{user.password}}" class="form-control" placeholder="Description">
+              <label>Türü</label>
+              <select name="user[roles]" class="form-control">
+                  <option value="ROLE_ADMIN">ROLE_ADMIN</option>
+                  <option value="ROLE_USER">ROLE_USER</option>
+              </select>
+              
+              <br>
+              <button type="submit" class="btn btn-info" style="margin-top: 20px">Kaydet</button>
           </form>
 {% endblock %}
