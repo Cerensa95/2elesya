@@ -1,11 +1,11 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin_base.html.twig' %}
 
 {% block title %}User{% endblock %}
 
-{% block body %}
+{% block content %}
     <h1>User</h1>
 
-    <table class="table">
+    <table class="table" style="margin-left: 400px; margin-top:100px;">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -17,7 +17,11 @@
             </tr>
             <tr>
                 <th>Roles</th>
-                <td>{{ user.roles }}</td>
+               <td>
+                    {% for role in user.roles %}
+                        {{ role }}
+                    {% endfor %}
+                </td>
             </tr>
             <tr>
                 <th>Password</th>
