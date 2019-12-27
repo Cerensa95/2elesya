@@ -1,10 +1,13 @@
+{% extends 'admin_base.html.twig' %}
 
 {% block title %}New UserImage{% endblock %}
 
-{% block body %}
+{% block content %}
     <h1>Create new UserImage</h1>
 
-    {{ include('user_image/_form.html.twig') }}
+    <div class="container">
+        {{ include('user_image/_form.html.twig') }}
+    </div>
 
     <a href="{{ path('user_image_index') }}">back to list</a>
 {% endblock %}
