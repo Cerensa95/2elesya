@@ -36,6 +36,7 @@ class FrontController extends Controller
 
         $statement->execute();
         $sliders=$statement->fetchAll();
+    
         
         $sales = $this -> getDoctrine()->getRepository(Sales::class)->findAll();  
         $data = $settingRepository->findAll();
@@ -84,9 +85,7 @@ class FrontController extends Controller
      */
     public function CategoryProducts($catid, CategoryRepository $catRepo)
     {   
-        $data = $catRepo->findBy(
-            ["id" => $catid]
-        );
+       
         $cats = $this->categoryList();
         $cats[0] = '<ul id="menu-v">';
 
@@ -99,7 +98,6 @@ class FrontController extends Controller
         
         return $this->render('list-products.html.twig', [
             'products' => $products,
-            'data' => $data,
             'cats' => $cats,
         ]);
 

@@ -159,28 +159,28 @@
   <div class="slider">
     <div class="carousel" data-flickity='{ "autoPlay": true }'>
       {% for slide in sliders %}
-      {% if  app.user %}
-      {% if  slide.userid != app.user.id and (slide.status == "true")  %}
-      <div class="carousel-cell">
-        <img class="slider-img"src="{{ asset('images') }}/{{slide.image}}" alt="">
-        <div class="slider-game">
-          <div class="slider-game__name"><a class="slider-game__name"
-              href="{{ path("urun-detay", {'id': slide.id} ) }}">{{slide.name}}</a></div>
-          <div class="slider-game__price">{{slide.price}} TL</div>
+          {% if  app.user %}
+            {% if  slide.userid != app.user.id and (slide.status == "true")  %}
+              <div class="carousel-cell">
+                <img class="slider-img"src="{{ asset('images') }}/{{slide.image}}" alt="">
+                <div class="slider-game">
+                  <div class="slider-game__name"><a class="slider-game__name"
+                      href="{{ path("urun-detay", {'id': slide.id} ) }}">{{slide.name}}</a></div>
+                  <div class="slider-game__price">{{slide.price}} TL</div>
+                </div>
+              </div>
+            {% endif %}
+        {% endif %}
+        {% if  app.user == null %}
+        <div class="carousel-cell">
+          <img class="slider-img"src="{{ asset('images') }}/{{slide.image}}" alt="">
+          <div class="slider-game">
+            <div class="slider-game__name"><a class="slider-game__name"
+                href="{{ path("urun-detay", {'id': slide.id} ) }}">{{slide.name}}</a></div>
+            <div class="slider-game__price">{{slide.price}} TL</div>
+          </div>
         </div>
-      </div>
-      {% endif %}
-      {% endif %}
-      {% if  app.user == null %}
-      <div class="carousel-cell">
-        <img class="slider-img"src="{{ asset('images') }}/{{slide.image}}" alt="">
-        <div class="slider-game">
-          <div class="slider-game__name"><a class="slider-game__name"
-              href="{{ path("urun-detay", {'id': slide.id} ) }}">{{slide.name}}</a></div>
-          <div class="slider-game__price">{{slide.price}} TL</div>
-        </div>
-      </div>
-      {% endif %}
+        {% endif %}
 
       {% endfor %}
     </div>
