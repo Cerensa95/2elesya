@@ -8,10 +8,14 @@ use App\Entity\Sales;
 use App\Entity\Image;
 use App\Entity\UserImage;
 use App\Form\ImageType;
+use App\Entity\Messages;
+
 
 use App\Form\UserType;
 use App\Form\CommentsType;
 use App\Form\UserImageType;
+use App\Form\MessagesType;
+
 use App\Repository\CategoryRepository;
 use App\Repository\SettingRepository;
 use App\Repository\UserRepository;
@@ -126,12 +130,8 @@ class FrontController extends Controller
                     return $this->redirectToRoute('user_index');
                 }
             }else {
-                return $this->render('register.html.twig', [
-              
-                ]);
+                return $this->render('register.html.twig');
             }
-
-          
         }
 
        
@@ -190,6 +190,74 @@ class FrontController extends Controller
         ]);
     }
 
-   
+      /**
+     * @Route("/iletisim", name="iletisim", methods="GET|POST")
+     */
+    public function iletisim(SettingRepository $settingRepository): Response
+    {  
+        
+        $data = $settingRepository->findAll();
+        
+        return $this->render('iletisim.html.twig', [
+            'data' => $data[0],
+        ]);
+       
+    }
+
+    /**
+     * @Route("/hakkimizda", name="aboutus", methods="GET|POST")
+     */
+    public function aboutus(SettingRepository $settingRepository): Response
+    {  
+        
+        $data = $settingRepository->findAll();
+        return $this->render('hakkimizda.html.twig', [
+            'data' => $data[0],
+        ]);
+       
+    }
+
+    /**
+     * @Route("/referans", name="referans", methods="GET|POST")
+     */
+    public function referans(SettingRepository $settingRepository): Response
+    {  
+        
+        $data = $settingRepository->findAll();
+        
+        return $this->render('referanslar.html.twig', [
+            'data' => $data[0],
+        ]);
+       
+    }
+
+    /**
+     * @Route("/contact", name="contact", methods="GET|POST")
+     */
+    public function contact(Request $request): Response
+    {  
+        
+        $message = new Messages();
+        $form = $this->createForm(MessagesType::class, $message);
+        $form->handleRequest($request);
+        
+        $submittedToken = $request->request->get('token');
+
+        if ($form->isSubmitted()) {
+           if($this->isCsrfTokenValid('form-message', $submittedToken)) {
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($message);
+                $em->flush();
+
+                return $this->redirectToRoute('home');
+           }
+        }
+
+        return $this->render('contact.html.twig', [
+            'message' => $message,
+            'form' => $form->createView(),
+        ]);
+    }
 }
 

@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Games;
 use App\Entity\Sales;
-use App\Entity\Messages;
 use App\Repository\CategoryRepository;
 use App\Repository\SettingRepository;
 
@@ -12,7 +11,6 @@ use App\Repository\SettingRepository;
 
 use App\Form\GamesType;
 use App\Form\SalesType;
-use App\Form\MessagesType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
@@ -153,81 +151,5 @@ class ProductController extends Controller
             'form' => $form->createView(),
             'catList' => $catList,
         ]);
-    }
-
-    /**
-     * @Route("/contact", name="contact", methods="GET|POST")
-     */
-    public function contact(Request $request, SettingRepository $settingRepository): Response
-    {  
-        
-        $data = $settingRepository->findAll();
-        
-        $message = new Messages();
-        $form = $this->createForm(MessagesType::class, $message);
-        $form->handleRequest($request);
-        
-        $submittedToken = $request->request->get('token');
-
-        if ($form->isSubmitted()) {
-
-          
-           if($this->isCsrfTokenValid('form-message', $submittedToken)) {
-
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($message);
-                $em->flush();
-
-                return $this->redirectToRoute('home');
-           }
-        }
-
-        return $this->render('contact.html.twig', [
-            'message' => $message,
-            'form' => $form->createView(),
-            'data' => $data[0],
-        ]);
-       
-    }
-
-    /**
-     * @Route("/iletisim", name="iletisim", methods="GET|POST")
-     */
-    public function iletisim(SettingRepository $settingRepository): Response
-    {  
-        
-        $data = $settingRepository->findAll();
-        
-        return $this->render('iletisim.html.twig', [
-            'data' => $data[0],
-        ]);
-       
-    }
-
-    /**
-     * @Route("/hakkimizda", name="aboutus", methods="GET|POST")
-     */
-    public function aboutus(SettingRepository $settingRepository): Response
-    {  
-        
-        $data = $settingRepository->findAll();
-        return $this->render('hakkimizda.html.twig', [
-            'data' => $data[0],
-        ]);
-       
-    }
-
-    /**
-     * @Route("/referans", name="referans", methods="GET|POST")
-     */
-    public function referans(SettingRepository $settingRepository): Response
-    {  
-        
-        $data = $settingRepository->findAll();
-        
-        return $this->render('referanslar.html.twig', [
-            'data' => $data[0],
-        ]);
-       
     }
 }
